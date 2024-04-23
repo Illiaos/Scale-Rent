@@ -9,10 +9,12 @@
         <script src="../../bootstrap/assets/js/vendor/jquery-slim.min.js"></script>
         <script src="../../bootstrap/assets/js/vendor/popper.min.js"></script>
         <script src="../../bootstrap/dist/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="../style.css">
         <title>Log In</title>
     </head>
     <body>
+        <?php 
+            include('../header/header.php');
+        ?>
         <div class="container-md w-50 p-3">
             <h1 class="mt-4 mb-4">Log In</h1>
             <form action="logIn.php" method="POST">
