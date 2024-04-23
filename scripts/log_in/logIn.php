@@ -160,6 +160,7 @@
                     {
                         $userType = getUserTypeFromDB($db_connection, $userData['type_id']);
                         setcookie("userLevel", $userType, time() + (86400 * 30), "/");
+                        setcookie("userID", $userData['user_id'], time() + (86400 * 30), "/");
                         return true;
                     } 
                     return false;

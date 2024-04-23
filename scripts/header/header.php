@@ -39,7 +39,16 @@
                     <li><a href="contact-page.html">Contact</a></li>
                 </ul>
             </nav>
-            <button type="submit">Login</button>
+            <?php
+                if(isset($_COOKIE['userID']) == false)
+                {
+                    echo ('<button type="submit">Login</button>');
+                }
+                else
+                {
+                    echo ('<button type="submit">Log out</button>');
+                }
+            ?>
         </div>
     </body>
 </html>
