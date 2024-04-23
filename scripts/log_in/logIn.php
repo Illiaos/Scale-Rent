@@ -54,7 +54,7 @@
                     if(isset($_GET['loadHomePage']))
                     {
                         //reqirect to the home page
-                        header('Location: ../index.html');
+                        header('Location: ../../index.php');
                         //close sql
                         mysqli_close($db_connection);
                         //stop script execution
@@ -62,7 +62,7 @@
                     }
                     else if(isset($_GET['loadRegistrationPage']))
                     {
-                        header('Location: ../registration.php');
+                        header('Location: ../registration/registration.php');
                         //close sql
                         mysqli_close($db_connection);
                         //stop script execution
@@ -136,15 +136,35 @@
 
                 function checkUserLogInData($db_connection, $userEmail, $userPassword) : bool
                 {
+                    //$userPassword = password_hash($userPassword, PASSWORD_BCRYPT);
+                    //echo ($userPassword);
                     //sql query, if the return number of rows == 0 return false, menning that user not exist else return true
-                    $sql = "SELECT * FROM user WHERE email='$userEmail' and password='$userPassword'";
-                    $result = mysqli_query($db_connection, $sql);
-                    if(mysqli_num_rows($result) == 0)
+                    //$sql = "SELECT * FROM user WHERE email='$userEmail'";
+                    //$result = mysqli_query($db_connection, $sql);
+                    //if(mysqli_num_rows($result) == 0)
+                    //{
+                        //return false;
+                    //}
+                    //mysqli_free_result($result);
+                    //return true;
+
+                    $stmt = $db_connection->prepare("SELECT * FROM user WHERE email=?");
+                    $stmt->bind_param("s", $userEmail);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $stmt->close();
+
+                    if($result->num_rows == 0)
                     {
                         return false;
                     }
-                    mysqli_free_result($result);
-                    return true;
+                    $passwordFromDB =  $result->fetch_assoc()['password'];
+                    
+                    if (password_verify($userPassword, $passwordFromDB)) 
+                    {
+                        return true;
+                    } 
+                    return false;
                 }
 
                 //method to validate user input
@@ -193,6 +213,7 @@
                             '</div>
                     ');
                     showHomeButton();
+                    echo('<br />');
                     showRegistrationButton();
                     echo('</div>');
                 }

@@ -139,6 +139,7 @@
             //method which is used to add data to DB, as a parameter get a connection to a DB and needed data
             function addToDB($db_connection, $userType, $userName, $userSurname, $userEmail, $userPassword)
             {
+                $userPassword = password_hash($userPassword, PASSWORD_BCRYPT);
                 $userTypeForeignKey = getTypeIdForeignKey($db_connection, $userType);
                 //sql query used to add data to DB
                 $sql = "INSERT INTO user (type_id, name, surname, email, password)
