@@ -84,7 +84,11 @@
 
                     if(checkUserLogInData($db_connection, $userEmail, $userPassword))
                     {
-                        showSuccess("User Logged In");
+                        header('Location: ../../index.php');
+                        //close sql
+                        mysqli_close($db_connection);
+                        //stop script execution
+                        exit();
                     }
                     else
                     {
@@ -136,18 +140,6 @@
 
                 function checkUserLogInData($db_connection, $userEmail, $userPassword) : bool
                 {
-                    //$userPassword = password_hash($userPassword, PASSWORD_BCRYPT);
-                    //echo ($userPassword);
-                    //sql query, if the return number of rows == 0 return false, menning that user not exist else return true
-                    //$sql = "SELECT * FROM user WHERE email='$userEmail'";
-                    //$result = mysqli_query($db_connection, $sql);
-                    //if(mysqli_num_rows($result) == 0)
-                    //{
-                        //return false;
-                    //}
-                    //mysqli_free_result($result);
-                    //return true;
-
                     $stmt = $db_connection->prepare("SELECT * FROM user WHERE email=?");
                     $stmt->bind_param("s", $userEmail);
                     $stmt->execute();
@@ -158,13 +150,27 @@
                     {
                         return false;
                     }
-                    $passwordFromDB =  $result->fetch_assoc()['password'];
+
+                    $userData = $result->fetch_assoc();
+                    $passwordFromDB =  $userData['password'];
                     
                     if (password_verify($userPassword, $passwordFromDB)) 
                     {
+                        $userType = getUserTypeFromDB($db_connection, $userData['type_id']);
+                        setcookie("userLevel", $userType, time() + (86400 * 30), "/");
                         return true;
                     } 
                     return false;
+                }
+
+                function getUserTypeFromDB($db_connection, $typeId) : string
+                {
+                    $stmt = $db_connection->prepare("SELECT * FROM user_type WHERE type_id=?");
+                    $stmt->bind_param("s", $typeId);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $stmt->close();
+                    return $result->fetch_assoc()['type'];
                 }
 
                 //method to validate user input
