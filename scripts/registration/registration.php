@@ -36,34 +36,34 @@
                 <div class="form-group">
                     <label class="font-weight-bold">User Name</label>
                     <input type="text" id="userName" name="userName" class="form-control" placeholder="Enter User Name"
-                    value="<?php echo $brand; ?>">
+                    value="<?php if(isset($_POST['userName'])) echo $_POST['userName']; ?>">
                 </div>
 
                 <!-- block for a Model input -->
                 <div class="form-group">
                     <label class="font-weight-bold">User Surname</label>
                     <input type="text" id="userSurname" name="userSurname" class="form-control" placeholder="Enter User Surname"
-                    value="<?php echo $model; ?>">
+                    value="<?php if(isset($_POST['userSurname'])) echo $_POST['userSurname']; ?>">
                 </div>
 
                 <!-- block for a Serial Number input -->
                 <div class="form-group">
                     <label class="font-weight-bold">User Email</label>
                     <input type="text" id="userEmail" name="userEmail" class="form-control" placeholder="Enter User Email"
-                    value="<?php echo $serial; ?>">
+                    value="<?php if(isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>">
                 </div>
 
                 <!-- block for a Purchase Date selection -->
                 <div class="form-group">
                     <label class="font-weight-bold">User Password</label>
                     <input type="text" id="userPassword" name="userPassword" class="form-control" placeholder="Enter Password"
-                    value="<?php echo $purchaseDate; ?>">
+                    value="<?php if(isset($_POST['userPassword'])) echo $_POST['userPassword']; ?>">
                 </div>
 
                 <div class="form-group">
                     <label class="font-weight-bold">Repeat User Password</label>
                     <input type="text" id="userPasswordRepeat" name="userPasswordRepeat" class="form-control" placeholder="Re-Enter Password"
-                    value="<?php echo $purchaseDate; ?>">
+                    value="<?php if(isset($_POST['userPasswordRepeat'])) echo $_POST['userPasswordRepeat']; ?>">
                 </div>
                 <button type="submit" value="Submit" class="btn btn-primary p-3">Register User</button>
             </form>
@@ -85,30 +85,30 @@
 
             if($_SERVER['REQUEST_METHOD'] == 'GET')
             {
-                if(isset($_GET['userExist']))
+                if(isset($_GET['loadHomePage']))
                 {
-                    //redirect to log in page
-                    //header('Location: addUser.php');
+                    header('Location: ../../../../index.php');
                     mysqli_close($db_connection);
                     exit();
                 }
-                else if(isset($_GET['loadHomePage']))
+                else if(isset($_GET['userRegistered']))
                 {
-                    header('Location: index.php');
-                    mysqli_close($db_connection);
-                    exit();
+                    //header('Location: index.php');
+                    //mysqli_close($db_connection);
+                    //exit();
+                    showSuccess("User Registered");
                 }
             }
 
             if($_SERVER['REQUEST_METHOD'] == 'POST')
             {
                 //assign values, from POST
-                $userType = validate_form_input($_POST['userType'] ?? '');
-                $userName = validate_form_input($_POST['userName'] ?? '');
-                $userSurname = validate_form_input($_POST['userSurname'] ?? '');
-                $userEmail = validate_form_input($_POST['userEmail'] ?? '');
-                $userPassword = validate_form_input($_POST['userPassword'] ?? '');
-                $userPasswordRepeat = validate_form_input($_POST['userPasswordRepeat'] ?? '');
+                $userType = validate_form_input($_POST['userType']);
+                $userName = validate_form_input($_POST['userName']);
+                $userSurname = validate_form_input($_POST['userSurname']);
+                $userEmail = validate_form_input($_POST['userEmail']);
+                $userPassword = validate_form_input($_POST['userPassword']);
+                $userPasswordRepeat = validate_form_input($_POST['userPasswordRepeat']);
 
                 //call method to check the correctness of user input
                 if(checkUserInput($userType, $userName, $userSurname, $userEmail, $userPassword, $userPasswordRepeat) == true)
@@ -116,10 +116,11 @@
                     //check if user exist
                     if(checkIfUserExist($db_connection, $userEmail) == true)
                     {
+                        showSingleError("User with email already exist");
                         //call header to send a raw HTTP header to client, curently to the same script, and pass value userExist
-                        header("Location: " . htmlspecialchars($_SERVER['PHP_SELF']) . "?userExist=true");
+                        //header("Location: " . htmlspecialchars($_SERVER['PHP_SELF']) . "?userExist=true");
                         //stop script execution
-                        exit();
+                        //exit();
                     }
                     //in case all errors check are passed, call method that will add data to the DB
                     else
@@ -132,15 +133,16 @@
             //method which is used to add data to DB, as a parameter get a connection to a DB and needed data
             function addToDB($db_connection, $userType, $userName, $userSurname, $userEmail, $userPassword)
             {
+                $userTypeForeignKey = getTypeIdForeignKey($db_connection, $userType);
                 //sql query used to add data to DB
-                $sql = "INSERT INTO appliance (UserID, ApplianceType, Brand, ModelNumber, SerialNumber, PurchaseDate, WarrantyExpirationDate, CostOfAppliance)
-                VALUES('$userID', '$applianceType', '$brand', '$model', '$serial', '$purchaseDate', '$warantyExpirationDate', '$costOfAppliance')";
+                $sql = "INSERT INTO user (type_id, name, surname, email, password)
+                VALUES('$userTypeForeignKey', '$userName', '$userSurname', '$userEmail', '$userPassword')";
 
                 //call sql compilation
                 if(mysqli_query($db_connection, $sql))
                 {
-                    //call header to send a raw HTTP header to client, curently to the same script, and pass value applianceAdded
-                    header("Location: " . htmlspecialchars($_SERVER['PHP_SELF']) . "?applianceAdded=true");
+                    //call header to send a raw HTTP header to client, curently to the same script, and pass value user registered
+                    header("Location: " . htmlspecialchars($_SERVER['PHP_SELF']) . "?userRegistered=true");
                     //stop script execution
                     exit();
                 }
@@ -149,6 +151,17 @@
                     //show error, if sql execution failed
                     showError(mysqli_error($db_connection));
                 }
+            }
+
+            function getTypeIdForeignKey($db_connection, $userType)
+            {
+                //define sql query, seek by id for user type
+                $stmt = $db_connection->prepare("SELECT * FROM user_type WHERE type=?");
+                $stmt->bind_param("s", $userType);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $stmt->close();
+                return $result->fetch_assoc()['type_id'];
             }
 
             //method used to check if user exist
