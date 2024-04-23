@@ -43,7 +43,7 @@
                 }
                 else
                 {
-                    $path_to_mysql_connect = '../../../mysql_connect.php';
+                    $path_to_mysql_connect = '../../../../mysql_connect.php';
                 }
 
                 //connect to DB

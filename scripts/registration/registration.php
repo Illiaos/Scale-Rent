@@ -25,7 +25,7 @@
                             $applianceOptions = array("", "Tenant", "Landlord");
                             foreach ($applianceOptions as $option) 
                             {
-                                $selected = ($applianceType == $option) ? 'selected' : '';
+                                $selected = ($_POST["userType"] == $option) ? 'selected' : '';
                                 echo '<option value="' . $option . '" ' . $selected . '>' . $option . '</option>';
                             }
                         ?>
@@ -77,7 +77,7 @@
             }
             else
             {
-                $path_to_mysql_connect = '../../../mysql_connect.php';
+                $path_to_mysql_connect = '../../../../mysql_connect.php';
             }
         
             //connect to DB
@@ -87,7 +87,7 @@
             {
                 if(isset($_GET['loadHomePage']))
                 {
-                    header('Location: ../../../../index.php');
+                    header('Location: ../../index.php');
                     mysqli_close($db_connection);
                     exit();
                 }
@@ -97,6 +97,12 @@
                     //mysqli_close($db_connection);
                     //exit();
                     showSuccess("User Registered");
+                }
+                else if(isset($_GET['loadLogInPage']))
+                {
+                    header('Location: ../log_in/logIn.php');
+                    mysqli_close($db_connection);
+                    exit();
                 }
             }
 
@@ -305,7 +311,7 @@
             function showHomeButton()
             {
                 echo ('
-                    <form action="addAppliance.php" method="GET">
+                    <form action="registration.php" method="GET">
                         <button type="submit" value="Submit" name="loadHomePage" class="btn btn-primary p-3">Home Page</button>
                     </form>
                 ');
@@ -320,45 +326,6 @@
                 echo ('</div>');
             }
 
-            //method used to render a view button, which will call GET, and send value for applianceID
-            function showRedirectToViewPageById($applianceID)
-            {
-                echo
-                ('
-                    <div class="container-md w-50 p-3">
-                        <form action="addAppliance.php" method="GET">
-                            <button type="submit" value="'.$applianceID.'" name="loadViewPageByID" class="btn btn-primary p-3">View Page</button>
-                        </form>
-                    </div>
-                ');
-            }
-
-            //method used to render a view button, which will call GET, and send value for serialNumber
-            function showRedirectToViewPageBySerialNumber($serial)
-            {
-                echo
-                ('
-                    <div class="container-md w-50 p-3">
-                        <form action="addAppliance.php" method="GET">
-                            <button type="submit" value="'.$serial.'" name="loadViewPageBySerialNumber" class="btn btn-primary p-3">View Page</button>
-                        </form>
-                    </div>
-                ');
-            }
-
-            //method used to render a addUser button, which will call GET
-            function showRedirectToAddUserPage()
-            {
-                echo
-                ('
-                    <div class="container-md w-50 p-3">
-                        <form action="addAppliance.php" method="GET">
-                            <button type="submit" value="" name="loadAddUserPage" class="btn btn-primary p-3">Add User Page</button>
-                        </form>
-                    </div>
-                ');
-            }
-
             //method used render success element
             function showSuccess($message)
             {
@@ -370,8 +337,12 @@
                             <strong>Success! </strong>'
                             . $message .
                         '</div>
-                        <form action="addAppliance.php" method="GET">
+                        <form action="registration.php" method="GET">
                             <button type="submit" value="Submit" name="loadHomePage" class="btn btn-primary p-3">Home Page</button>
+                        </form>
+                        <br />
+                        <form action="registration.php" method="GET">
+                            <button type="submit" value="Submit" name="loadLogInPage" class="btn btn-primary p-3">LogIn Page</button>
                         </form>
                     </div>
                 ');
