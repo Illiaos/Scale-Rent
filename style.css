@@ -1,0 +1,843 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.site-logo img {
+    width: 15rem;
+    height: auto;
+    margin: 1rem;
+}
+
+#side-head {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffff;
+    box-shadow: 0px 0px 2px 0px;
+    border: #fff;
+}
+
+#side-head button {
+    color: #fff;
+    font-weight: bolder;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1.5rem;
+}
+
+nav ul li {
+    text-decoration: none;
+    list-style-type: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    list-style-type: none;
+    padding: 1rem;
+    font-size: 1.2rem;
+    color: #49BEB7;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #333;
+    border-top: none;
+    z-index: 1;
+    width: 15%;
+    height: auto;
+    margin-bottom: 2rem;
+    padding: 1rem 0 1rem 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+.main-site img {
+    width: 100%;
+    height: 120vh;
+}
+
+.main-site {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.text {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+button {
+    width: 7rem;
+    height: 2.5rem;
+    margin: 1rem;
+    background-color: #49BEB7;
+    border: 1px solid transparent;
+    border-radius: .5rem;
+}
+
+button a {
+    color: #ffff;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+button a:hover {
+    color: #085F63;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 1rem;
+}
+
+.cities {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+    background-color: #d6edfa;
+    padding: 2rem;
+    margin-bottom: 4rem;
+}
+
+#slides img {
+    width: 12rem;
+    height: 12rem;
+    border-radius: 25%;
+}
+
+#slides h3,
+#slides p {
+    text-align: center;
+}
+
+#types {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 6rem;
+    margin: 2rem;
+}
+
+#type img {
+    width: 12rem;
+    height: 12rem;
+    border-radius: .5rem;
+    align-items: center;
+    margin: 1rem;
+}
+
+#guestbook {
+    background-color: #49BEB7;
+    margin: 2rem;
+}
+
+#guestbook h3 {
+    font-size: 2.3rem;
+    text-align: center;
+    color: #000;
+    padding-bottom: 1rem;
+}
+
+.reviewers {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
+
+.review,
+.review2,
+.review3 {
+    background-color: #d6edfa;
+    margin: 1rem;
+    border-radius: 1rem;
+    width: 50%;
+    height: auto;
+    padding: 1.2rem;
+    color: #000;
+}
+
+.review3,
+.review {
+    padding: 1.3rem;
+}
+
+.reviewer img {
+    width: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.apros {
+    width: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding-bottom: 1rem;
+}
+
+#type {
+    box-sizing: border-box;
+    width: 14rem;
+    height: 18em;
+    border-radius: 1rem;
+    background-color: #fff;
+    box-shadow: 1px 1px 3px 0px;
+}
+
+#type h3 {
+    text-align: center;
+}
+
+#display {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5rem;
+}
+
+.figures {
+    box-sizing: border-box;
+    width: 30rem;
+    height: 20em;
+    border-radius: 1rem;
+    background-color: #fff;
+    box-shadow: 1px 1px 3px 0px;
+}
+
+.image {
+    box-sizing: border-box;
+    width: 40rem;
+    height: 20em;
+    border-radius: 1rem;
+    background-color: #fff;
+    box-shadow: 1px 1px 3px 0px;
+}
+
+.image img {
+    width: 40rem;
+    border-radius: 1rem;
+    height: 20rem;
+}
+
+.figures ul li {
+    font-size: 1, 3rem;
+    padding: 1rem;
+    margin-left: 2rem;
+}
+
+.figures {
+    background-color: #49BEB7;
+}
+
+.figures h3 {
+    font-size: 2.8rem;
+    padding: 1rem;
+}
+
+.ref {
+    display: flex;
+    justify-content: space-around;
+
+    margin-bottom: 2rem;
+    background-color: #085F63;
+    padding: 1rem;
+    padding-top: 5rem;
+    height: 8rem;
+}
+
+.fig h4 {
+    font-size: 2.5rem;
+}
+
+.fig p {
+    font-size: 1.2rem;
+}
+
+#dream-house {
+    padding: 2rem;
+    background-color: #49BEB7;
+}
+
+#dream-house h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+#dream-house p {
+    font-size: 1.3rem;
+}
+
+.forms {
+    padding: 1rem;
+}
+
+.forms label {
+    font-size: 1rem;
+    padding: 1rem;
+}
+
+.forms input {
+    height: 2rem;
+}
+
+.forms button {
+    background-color: #085F63;
+}
+
+.forms button:hover {
+    color: #ffff;
+}
+
+.apartment h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #085F63;
+    padding-left: 2rem;
+}
+
+span {
+    color: #49BEB7;
+}
+
+.apartment p {
+    font-size: 1.2rem;
+    color: #085F63;
+    padding-left: 2rem;
+}
+
+footer {
+    background-color: #085F63;
+    font-size: 2rem;
+}
+
+.site-footer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.opening-time ul {
+    list-style-type: none;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.useful-link ul li a {
+    color: #000;
+    margin: 1rem;
+}
+
+.useful-link ul li a:hover {
+    color: #085F63;
+    transition: 3s;
+}
+
+.useful-link ul {
+    list-style-type: none;
+    font-size: 1.3rem;
+    line-height: 1.5;
+
+}
+
+.newsletter h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding-left: 2rem;
+    padding-top: 2rem;
+}
+
+.newsletter input {
+    height: 2rem;
+    margin-left: 2rem;
+}
+
+#menuButton {
+    color: #000;
+    cursor: pointer;
+    display: none;
+    font-size: 2rem;
+    padding: 0.5rem;
+
+}
+
+#about-page {
+    width: 80%;
+    margin: auto;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+#about-page img {
+    height: 100%;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* #about-page p{
+    font-size: 1.2rem;
+    padding: 2rem;
+    padding-top: 1rem;
+    line-height: 1.5;
+} */
+.mission p {
+    font-size: 1.1rem;
+}
+
+.values ul li {
+    padding: 1rem;
+}
+
+.values {
+    margin-bottom: 2rem;
+}
+
+#team img {
+    border-radius: 2%;
+    width: 18rem;
+    height: 15rem;
+    padding: .7rem;
+}
+
+.ceo,
+.pm,
+.gs,
+.site-manager,
+.senior-Architect,
+.senior-surveyor {
+    box-sizing: border-box;
+    box-shadow: 0px 1px 1px 2px;
+    width: 32%;
+    padding: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+#team {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 2rem;
+}
+
+.senior-surveyor img {
+    width: 15rem;
+    height: 10rem;
+}
+
+.background h3,
+h5 {
+    text-align: center;
+}
+
+.background {
+    padding: 1rem;
+    line-height: 1.5;
+}
+
+.contact-image img {
+    width: 50vw;
+    margin: auto;
+}
+
+.contact-page {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem;
+}
+
+.contact-text {
+    font-size: 1.3rem;
+    margin-top: 5rem;
+    line-height: 1.5;
+}
+
+h1 {
+    text-align: center;
+}
+
+.content {
+    max-width: 1500px;
+    margin: 0 auto;
+    font-size: 1.7rem;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section h2 {
+    margin-bottom: 10px;
+}
+
+.section p {
+    line-height: 1.5;
+}
+
+#blog {
+    margin: 2rem;
+    line-height: 1.5;
+    font-size: 1.5rem;
+
+}
+
+#team-page {
+    font-size: 1.1rem;
+}
+
+#privacy {
+    margin: 2rem;
+    margin-bottom: 5.5rem;
+    line-height: 1.5;
+    font-size: 1.5rem;
+}
+
+#career {
+    margin: 2rem;
+    line-height: 1.5;
+    font-size: 1.3rem;
+}
+
+#career ul li {
+    font-size: 1.3rem;
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width:500px) {
+    #menuButton {
+        display: block;
+        padding-left: 2rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        height: 20rem;
+        width: 100vw;
+        z-index: 10;
+    }
+
+    nav .open {
+        max-height: 70rem;
+        background-color: #000;
+        transition: 5s;
+    }
+
+    .site-logo img {
+        width: 8rem;
+    }
+
+    .main-site img {
+        width: 100%;
+    }
+
+    .cities {
+        flex-direction: column;
+    }
+
+    #types {
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+
+    .content {
+        padding: 0;
+        width: 100%;
+    }
+
+    .section {
+        padding: 10px;
+    }
+
+    article {
+        margin-bottom: 30px;
+    }
+
+    article h2 {
+        font-size: 20px;
+    }
+
+    #type {
+        margin-bottom: 2rem;
+    }
+
+    #type h3 {
+        font-size: 1.3rem;
+        text-align: center;
+
+        padding-left: 3rem;
+    }
+
+    #type img {
+        width: 11.9rem;
+
+    }
+
+    #display {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .figures {
+        box-sizing: border-box;
+        width: 13rem;
+        height: 25rem;
+        border-radius: 1rem;
+        box-shadow: 1px 1px 3px 0px;
+    }
+
+    .image img {
+        width: 23.5rem;
+        border-radius: 1rem;
+        height: 20rem;
+    }
+
+    .ref {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+    }
+
+    .fig {
+        padding-bottom: 5rem;
+    }
+
+    footer {
+        height: auto;
+    }
+
+    .site-footer {
+        flex-direction: column;
+    }
+
+    #dream-house {
+        padding: 3rem;
+    }
+
+    .site-footer ul li {
+        font-size: 1.3rem;
+        padding: 1rem;
+        font-weight: bold;
+    }
+
+    .useful-link ul li,
+    .landmark ul li {
+        color: #000;
+    }
+
+    #about-page {
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
+
+    #team {
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 1rem;
+    }
+
+    #team img {
+        border-radius: 2%;
+        width: 18.5rem;
+        height: 15rem;
+        padding: .7rem;
+    }
+
+    .ceo,
+    .pm,
+    .gs,
+    .site-manager,
+    .senior-Architect,
+    .senior-surveyor {
+        box-sizing: border-box;
+        box-shadow: 0px 1px 1px 2px;
+        width: 100%;
+        margin-bottom: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    #contact-page {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    #menuButton {
+        display: block;
+        padding-left: 2rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+    }
+
+    nav .open {
+        max-height: 70rem;
+        background-color: #000;
+        transition: 5s;
+    }
+
+    .main-site img {
+        width: 100%;
+        height: 90vh;
+    }
+
+    /* .text{
+       font-size: 2.5rem;
+    } */
+    button {
+        width: 10rem;
+        height: 3.5rem;
+    }
+
+    .cities {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+    }
+
+    .ceo,
+    .pm,
+    .gs,
+    .site-manager,
+    .senior-Architect,
+    .senior-surveyor {
+        box-sizing: border-box;
+        box-shadow: 0px 1px 1px 2px;
+        margin-bottom: 3rem;
+        margin: auto;
+        width: 80%;
+
+    }
+
+    article h2 {
+        font-size: 18px;
+    }
+
+    #team img {
+        border-radius: 2%;
+        width: 18rem;
+        height: 10rem;
+    }
+
+    #team {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 2rem;
+
+    }
+
+    #slides img {
+        width: 10rem;
+        height: 10rem;
+        padding: 1.5rem;
+    }
+
+    #slides h3 {
+        font-size: 2rem;
+
+    }
+
+    #slides p {
+        font-size: 2rem;
+
+    }
+
+    #types {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #type {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 1rem;
+    }
+
+    /* #type img{
+        width: auto;
+
+    } */
+    #display {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .figures {
+        box-sizing: border-box;
+        width: 18rem;
+        height: auto;
+        margin-top: 2.5rem;
+    }
+
+    .figures h3 {
+        font-size: 2rem;
+
+    }
+
+    .figures ul li {
+        font-size: 1.8rem;
+
+    }
+
+    .image {
+        width: 18rem;
+    }
+
+    .image img {
+        width: 18rem;
+    }
+
+    .ref h4 {
+        font-size: 4rem;
+    }
+
+    .ref p {
+        font-size: 2rem;
+    }
+
+    #dream-house h3 {
+        font-size: 3rem;
+    }
+
+    #dream-house p {
+        font-size: 2rem;
+    }
+
+    #dream-house label {
+        font-size: 2rem;
+
+    }
+
+    .newsletter h3 {
+        font-size: 2rem;
+    }
+
+    .newsletter input {
+        width: 15rem;
+    }
+
+    footer {
+        height: autos;
+    }
+
+    #about-page {
+        font-size: 2rem;
+        line-height: 1.5;
+    }
+}
