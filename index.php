@@ -10,7 +10,7 @@
     </head>
     <body>
         <?php 
-            include('scripts/header/header.php');
+            include(__DIR__.'/scripts/header/header.php');
         ?>
         <main>
             <div class="main-site">

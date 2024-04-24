@@ -4,14 +4,14 @@
         <meta charset="UTF-8">      
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../style.css">
+        <link rel="stylesheet" href="/Scale-Rent/style.css">
         <script src="script.js"></script>
         <title>Nassdam Solid Ventures</title>
     </head>
     <body>
         <div id="side-head">
             <div class="site-logo">
-                <img src="../../pics/logo-removebg-preview.png" alt="site-logo">
+                <img src="/Scale-Rent/pics/logo-removebg-preview.png" alt="site-logo">
             </div>
             <div id="menuButton">
                 ☰
@@ -40,13 +40,33 @@
                 </ul>
             </nav>
             <?php
+                if($_SERVER['REQUEST_METHOD'] == 'POST')
+                {
+                    if(isset($_POST['logInPage']))
+                    {
+                        header("Location: /Scale-Rent/scripts/log_in/logIn.php");
+                        exit();
+                    }
+                    else if(isset($_POST['logOutPage']))
+                    {
+                        header("Location: /Scale-Rent/scripts/logout/logout.php");
+                        exit();
+                    }
+                }
+                
                 if(isset($_COOKIE['userID']) == false)
                 {
-                    echo ('<button type="submit">Login</button>');
+                    echo '
+                    <form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="POST">
+                        <button type="submit" name="logInPage">Login</button>
+                    </form>';
                 }
                 else
                 {
-                    echo ('<button type="submit">Log out</button>');
+                    echo '
+                    <form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="POST">
+                        <button type="submit" name="logOutPage">Logout</button>
+                    </form>';
                 }
             ?>
         </div>

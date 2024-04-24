@@ -94,6 +94,7 @@
                     }
                     else
                     {
+                        echo("ENTER");
                         showSingleError("Wrong Email or Password");
                     }
                 }
