@@ -49,7 +49,7 @@
                     }
                     else if(isset($_POST['logOutPage']))
                     {
-                        header("Location: /Scale-Rent/scripts/logout/logout.php");
+                        header('Location: /Scale-Rent/scripts/logout/logout.php?cookieReset');
                         exit();
                     }
                 }

@@ -26,7 +26,7 @@
                 }
                 else
                 {
-                    $path_to_mysql_connect = '../../../mysql_connect.php';
+                    $path_to_mysql_connect = '../../../../mysql_connect.php';
                 }
 
                 //connect to DB
@@ -34,18 +34,26 @@
 
                 if ($_SERVER['REQUEST_METHOD'] == 'GET')
                 {
-                    if(isset($_COOKIE['userLevel']))
+                    if(isset($_GET['cookieReset']))
                     {
-                        unset($_COOKIE['userLevel']);
-                        setcookie('userLevel', '', -1, '/'); 
+                        if(isset($_COOKIE['userLevel']))
+                        {
+                            unset($_COOKIE['userLevel']);
+                            setcookie('userLevel', '', -1, '/'); 
+                        }
+    
+                        if(isset($_COOKIE['userID']))
+                        {
+                            unset($_COOKIE['userID']);
+                            setcookie('userID', '', -1, '/'); 
+                        }
+                        header("Location: /Scale-Rent/scripts/logout/logout.php?logOutConfirmation");
+                        exit();
                     }
-
-                    if(isset($_COOKIE['userID']))
+                    else if(isset($_GET['logOutConfirmation']))
                     {
-                        unset($_COOKIE['userID']);
-                        setcookie('userID', '', -1, '/'); 
+                        showSuccess("Log out successful");
                     }
-                    showSuccess("Log out successful");
                 }
 
                 // checking to see if the server has received a POST request.
