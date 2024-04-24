@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
+    <script src="script.js"></script>
     <title>Nassdam Solid Ventures</title>
 </head>
 <body>
@@ -34,35 +34,48 @@
             <p>Monday - Friday</p>
             <p>9am - 5pm</p>
             <p>Saturdays 10am - 3pm</p>
-        
-            <h3>Chat Us</h3>
-            <p>Call us <a href="#">0830785102</a></p>
-            <p>facebook <a href="#">https://Nassadamventures/facebook.ng</a></p>
-            <p>Twitter <a href="#">https://Nassadamventures/Twitter.ng</a></p>
         </div>
     </main>
     <footer>
-        <div>
+        <div class="contact-form">
             <?php
+            // check if form is submitted
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                // Check if email is entered
-                if (!empty($_POST['email'])) {
-                    $email = $_POST['email'];
-            
-                    // Print success message
-                    echo "<p>You have successfully subscribed to our newsletter. You will be amongst the people to hear about us firsthand.</p>";
+                // define your admin email
+                $admin_email = "admin@example.com";
+                
+                // get form data
+                $name = $_POST["name"];
+                $email = $_POST["email"];
+                $message = $_POST["message"];
+                
+                // validation
+                if (empty($name) || empty($email) || empty($message)) {
+                    echo "Please fill in all fields.";
                 } else {
-                    // Email is empty, show error message
-                    echo "<p>Error: Please enter your email address.</p>";
+                    // send email to admin
+                    $subject = "New message from Contact Form";
+                    $body = "Name: $name\nEmail: $email\n\n$message";
+                    
+                    // error to send message
+                    if (mail($admin_email, $subject, $body)) {
+                        echo "Message sent successfully. Thank you!";
+                    } else {
+                        echo "Oops! Something went wrong. Please try again later.";
+                    }
                 }
             }
             ?>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <input type="email" placeholder="Enter Your E-mail">
-            <button type="submit">Subscribe</button>
-        </form>
+            <form id="contact-form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"><br>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4"></textarea><br>
+                <input type="submit" value="Submit">
+            </form>
         </div>
-    </div>
         <div class="site-footer">
             <div class="opening-time">
                 <ul>
@@ -73,15 +86,15 @@
                 </ul>
             </div>
             <hr>
-                <div class="useful-link">
-                    <ul>
-                            <li><a href="terms.html">Terms & Conditions</a></li>
-                            <li><a href="privacy.html">Privacy Policy</a></li>
-                            <li><a href="blog.html">Blog</a></li>
-                            <li><a href="#">Testimony</a></li>
-                            <li><a href="Career.html">Careers</a></li>
-                    </ul>
-                </div>
+            <div class="useful-link">
+                <ul>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#">Testimony</a></li>
+                    <li><a href="Career.html">Careers</a></li>
+                </ul>
+            </div>
         </div>
     </footer>
 </body>
