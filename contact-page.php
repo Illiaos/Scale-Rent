@@ -47,15 +47,16 @@
                 // get form data
                 $name = $_POST["name"];
                 $email = $_POST["email"];
+                $phone = $_POST["phone"]; 
                 $message = $_POST["message"];
                 
                 // validation
-                if (empty($name) || empty($email) || empty($message)) {
+                if (empty($name) || empty($email) || empty($phone) || empty($message)) { 
                     echo "Please fill in all fields.";
                 } else {
                     // send email to admin
                     $subject = "New message from Contact Form";
-                    $body = "Name: $name\nEmail: $email\n\n$message";
+                    $body = "Name: $name\nEmail: $email\nPhone: $phone\n\n$message"; 
                     
                     // error to send message
                     if (mail($admin_email, $subject, $body)) {
@@ -71,6 +72,8 @@
                 <input type="text" id="name" name="name"><br>
                 <label for="email">Email:</label><br>
                 <input type="email" id="email" name="email"><br>
+                <label for="phone">Phone:</label><br> 
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br> 
                 <label for="message">Message:</label><br>
                 <textarea id="message" name="message" rows="4"></textarea><br>
                 <input type="submit" value="Submit">
