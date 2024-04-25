@@ -10,6 +10,7 @@
         <script src="../../bootstrap/assets/js/vendor/popper.min.js"></script>
         <script src="../../bootstrap/dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="passwordRecover_style.css">
         <title>Password Recover</title>
     </head>
     <body>

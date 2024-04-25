@@ -9,6 +9,7 @@
         <script src="../../bootstrap/assets/js/vendor/jquery-slim.min.js"></script>
         <script src="../../bootstrap/assets/js/vendor/popper.min.js"></script>
         <script src="../../bootstrap/dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="addProperty_style.css">
         <title>New Property Register</title>
     </head>
     <body>
@@ -20,23 +21,26 @@
             <form action="addProperty.php" method="POST" enctype="multipart/form-data">
 
                 <?php
-                    $userLevel = $_COOKIE['userLevel'];
-                    if($userLevel == "Admin")
+                    if(isset($_COOKIE['userLevel']))
                     {
-                        $landlordEmail = "";
-                        if(isset($_POST['landlordEmail']) == true)
+                        $userLevel = $_COOKIE['userLevel'];
+                        if($userLevel == "Admin")
                         {
-                            $landlordEmail = $_POST['landlordEmail'];
+                            $landlordEmail = "";
+                            if(isset($_POST['landlordEmail']) == true)
+                            {
+                                $landlordEmail = $_POST['landlordEmail'];
+                            }
+    
+                            echo 
+                            ('
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Landlord Email</label>
+                                    <input type="text" id="landlordEmail" name="landlordEmail" class="form-control" placeholder="Enter Landlord Email"
+                                    value="'.$landlordEmail.'">
+                                </div>
+                            ');
                         }
-
-                        echo 
-                        ('
-                            <div class="form-group">
-                                <label class="font-weight-bold">Landlord Email</label>
-                                <input type="text" id="landlordEmail" name="landlordEmail" class="form-control" placeholder="Enter Landlord Email"
-                                value="'.$landlordEmail.'">
-                            </div>
-                        ');
                     }
                 ?>
 
@@ -92,7 +96,7 @@
                     value="<?php if(isset($_POST['propertyPrice'])) echo $_POST['propertyPrice']; ?>">
                 </div>
 
-                <input type="file" name="uploadImageFiles[]" id="uploadImageFiles" multiple>
+                <input type="file" name="uploadImageFiles[]" id="uploadImageFiles" multiple  class="upload">
                 <!--<input type="submit" name="uploadImageCall" value="Upload"> -->
 
                 <button type="submit" name="addPropertyCall" class="btn btn-primary p-3">Add property</button>

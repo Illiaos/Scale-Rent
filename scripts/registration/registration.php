@@ -5,69 +5,59 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- connect bootstrap libraries -->
-        <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+         <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="../../bootstrap/assets/js/vendor/jquery-slim.min.js"></script>
         <script src="../../bootstrap/assets/js/vendor/popper.min.js"></script>
         <script src="../../bootstrap/dist/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="log.css"> 
+        <link rel="stylesheet" href="registration_style.css"> 
         <title>User Registration</title>
     </head>
     <body>
-        <div class="container-md w-50 p-3">
-            <h1 class="mt-4 mb-4">User Registration Form</h1>
-
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-                <!-- block for appliacne selection type -->
-                <div class="form-group">
-                    <label class="font-weight-bold">User Type</label>
-                    <select id="userType" name="userType" class="form-control">
-                        <?php
-                            $applianceOptions = array("", "Tenant", "Landlord");
-                            foreach ($applianceOptions as $option) 
-                            {
-                                $selected = ($_POST["userType"] == $option) ? 'selected' : '';
-                                echo '<option value="' . $option . '" ' . $selected . '>' . $option . '</option>';
-                            }
-                        ?>
-                    </select>
-                </div>
-
-                <!-- block for a Brand input -->
-                <div class="form-group">
-                    <label class="font-weight-bold">User Name</label>
-                    <input type="text" id="userName" name="userName" class="form-control" placeholder="Enter User Name"
-                    value="<?php if(isset($_POST['userName'])) echo $_POST['userName']; ?>">
-                </div>
-
-                <!-- block for a Model input -->
-                <div class="form-group">
-                    <label class="font-weight-bold">User Surname</label>
-                    <input type="text" id="userSurname" name="userSurname" class="form-control" placeholder="Enter User Surname"
+    <div class="registration-container">
+        <h2>Register</h2>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="input-group">
+                <label for="usertype">User Type</label>
+                <select id="userType" name="userType" class="form-control">
+                    <?php
+                        $applianceOptions = array("", "Tenant", "Landlord");
+                        foreach ($applianceOptions as $option) 
+                        {
+                            $selected = ($_POST["userType"] == $option) ? 'selected' : '';
+                            echo '<option value="' . $option . '" ' . $selected . '>' . $option . '</option>';
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="name">FirstName</label>
+                <input type="text" id="name" name="name"placeholder="Enter firstname" value="<?php if(isset($_POST['userName'])) echo $_POST['userName']; ?>">
+            </div>
+            <div class="input-group">
+                <label for="surname">Surname</label>
+                <input type="text" id="userSurname" name="userSurname" placeholder="Enter User Surname"
                     value="<?php if(isset($_POST['userSurname'])) echo $_POST['userSurname']; ?>">
-                </div>
-
-                <!-- block for a Serial Number input -->
-                <div class="form-group">
-                    <label class="font-weight-bold">User Email</label>
-                    <input type="text" id="userEmail" name="userEmail" class="form-control" placeholder="Enter User Email"
-                    value="<?php if(isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>">
-                </div>
-
-                <!-- block for a Purchase Date selection -->
-                <div class="form-group">
-                    <label class="font-weight-bold">User Password</label>
-                    <input type="text" id="userPassword" name="userPassword" class="form-control" placeholder="Enter Password"
+            </div>
+            <div class="input-group">
+                <label>User Email</label>
+                <input type="text" id="userEmail" name="userEmail"  placeholder="Enter User Email"
+                value="<?php if(isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>">
+            </div>
+            <div class="input-group">
+                <label>User Password</label>
+                    <input type="text" id="userPassword" name="userPassword" placeholder="Enter Password"
                     value="<?php if(isset($_POST['userPassword'])) echo $_POST['userPassword']; ?>">
-                </div>
-
-                <div class="form-group">
-                    <label class="font-weight-bold">Repeat User Password</label>
-                    <input type="text" id="userPasswordRepeat" name="userPasswordRepeat" class="form-control" placeholder="Re-Enter Password"
+            </div>
+            <div class="input-group">
+                <label>Repeat User Password</label>
+                    <input type="text" id="userPasswordRepeat" name="userPasswordRepeat"  placeholder="Re-Enter Password"
                     value="<?php if(isset($_POST['userPasswordRepeat'])) echo $_POST['userPasswordRepeat']; ?>">
-                </div>
-                <button type="submit" value="Submit" class="btn btn-primary p-3">Register User</button>
-            </form>
-        </div>
+            </div>
+            <button type="submit" value="Submit">Register User</button>
+        </form>
+        <p>Already have an account? <a href="login.php">Log in here</a>.</p>
+    </div>
 
         <?php
             //define server path

@@ -9,34 +9,30 @@
         <script src="../../bootstrap/assets/js/vendor/jquery-slim.min.js"></script>
         <script src="../../bootstrap/assets/js/vendor/popper.min.js"></script>
         <script src="../../bootstrap/dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="logIn_style.css">
         <title>Log In</title>
     </head>
     <body>
         <?php 
             include('../header/header.php');
         ?>
-        <div class="container-md w-50 p-3">
-            <h1 class="mt-4 mb-4">Log In</h1>
-            <form action="logIn.php" method="POST">
-
-                <!-- block for a First Name input -->
-                <div class="form-group">
-                    <label class="font-weight-bold">Email</label>
-                    <input type="text" id="userEmail" name="userEmail" class="form-control" placeholder="Enter Email"
+        <div class="login-container">
+        <h2>Login</h2>
+        <form action="logIn.php" method="POST">
+            <div class="input-group">
+                <label for="username">Email</label>
+                <input type="text" id="userEmail" name="userEmail" class="form-control" placeholder="Enter Email"
                     value="<?php if(isset($_POST['userEmail'])) echo $_POST['userEmail']; ?>">
-                </div>
-
-                <!-- block for a Last Name input -->
-                <div class="form-group">
-                    <label class="font-weight-bold">Password</label>
-                    <input type="text" id="userPassword" name="userPassword" class="form-control" placeholder="Enter Password"
-                    value="<?php if(isset($_POST['userPassword'])) echo $_POST['userPassword']; ?>">
-                </div>
-
-                <button type="submit" value="Submit" class="btn btn-primary p-3">Log In</button>
-            </form>
-        </div>
-
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="text" id="userPassword" name="userPassword" class="form-control" placeholder="Enter Password"
+                value="<?php if(isset($_POST['userPassword'])) echo $_POST['userPassword']; ?>">
+            </div>
+            <button type="submit" value="submit">Login</button>
+        </form>
+        <p>If you don't have an account,click <a href="../registration/registration.php">here</a> to sign up.</p>
+    </div>
         <?php
                 //define server path
                 if ($_SERVER['SERVER_NAME'] == 'knuth.griffith.ie')
