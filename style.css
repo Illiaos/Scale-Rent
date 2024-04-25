@@ -840,4 +840,10 @@ h1 {
         font-size: 2rem;
         line-height: 1.5;
     }
+
+    .card-img-top {
+        max-width: 10%;
+        height: 10%;
+        margin-bottom: 10px;
+    }
 }
