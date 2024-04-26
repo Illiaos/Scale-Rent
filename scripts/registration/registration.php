@@ -32,7 +32,7 @@
             </div>
             <div class="input-group">
                 <label for="name">FirstName</label>
-                <input type="text" id="name" name="name"placeholder="Enter firstname" value="<?php if(isset($_POST['userName'])) echo $_POST['userName']; ?>">
+                <input type="text" id="userName" name="userName" placeholder="Enter firstname" value="<?php if(isset($_POST['userName'])) echo $_POST['userName']; ?>">
             </div>
             <div class="input-group">
                 <label for="surname">Surname</label>

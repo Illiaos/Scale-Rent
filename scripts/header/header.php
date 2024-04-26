@@ -13,32 +13,7 @@
             <div class="site-logo">
                 <img src="/Scale-Rent/pics/logo-removebg-preview.png" alt="site-logo">
             </div>
-            <div id="menuButton">
-                ☰
-            </div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="../../index.php">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#">Rent</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Rent a Villa</a></li>
-                            <li><a href="#">Rent an Apartment</a></li>
-                            <li><a href="#">Rent a shared room</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Sell</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Sell a Villa</a></li>
-                            <li><a href="#">Sell an Apartment</a></li>
-                            <li><a href="#">Sell a shared room</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact-page.html">Contact</a></li>
-                </ul>
-            </nav>
+
             <?php
                 if($_SERVER['REQUEST_METHOD'] == 'POST')
                 {
@@ -51,6 +26,31 @@
                     {
                         header('Location: /Scale-Rent/scripts/logout/logout.php?cookieReset');
                         exit();
+                    }
+                }
+
+                if(isset($_COOKIE['userLevel']) == false)
+                {
+                    showPuplicNavigation();
+                }
+                else
+                {
+                    $userType = $_COOKIE['userLevel']; 
+                    if($userType == "Admin")
+                    {
+                        showAdminNavigation();
+                    }
+                    else if($userType == "Landlord")
+                    {
+                        showLandlordNavigation();
+                    }
+                    else if($userType == "Tenant")
+                    {
+                        showTenantNavigation();
+                    }
+                    else
+                    {
+                        showPuplicNavigation();
                     }
                 }
                 
@@ -67,6 +67,58 @@
                     <form action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" method="POST">
                         <button type="submit" name="logOutPage">Logout</button>
                     </form>';
+                }
+
+                function showPuplicNavigation()
+                {
+                    echo
+                    ('
+                        <nav>
+                            <ul class="nav-links">
+                                <li><a href="/Scale-Rent/index.php">Home</a></li>
+                                <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Property</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="contact-page.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                    ');
+                }
+
+                function showLandlordNavigation()
+                {
+                    echo
+                    ('
+                        <nav>
+                            <ul class="nav-links">
+                                <li><a href="/Scale-Rent/index.php">Home</a></li>
+                                <li><a href="/Scale-Rent/scripts/property/addProperty.php">Add New Property</a></li>
+                                <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Own Property</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="contact-page.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                    ');
+                }
+
+                function showTenantNavigation()
+                {
+
+                }
+
+                function showAdminNavigation()
+                {
+                    echo
+                    ('
+                        <nav>
+                            <ul class="nav-links">
+                                <li><a href="../../index.php">Home</a></li>
+                                <li><a href="/Scale-Rent/scripts/property/addProperty.php">Add New Property</a></li>
+                                <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Property</a></li>
+                                <li><a href="about.html">About</a></li>
+                                <li><a href="contact-page.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                    ');
                 }
             ?>
         </div>
