@@ -251,7 +251,7 @@
                         {
                             echo 
                             ('
-                            <a href="edit_property.php?postcode='.$row["post_code"].'" class="btn btn-primary">Edit</a>
+                            <a href="editProperty.php?property_id='.$row["property_id"].'" class="btn btn-primary">Edit</a>
                             ');
                         }
                         else
