@@ -122,29 +122,58 @@ button[type="submit"]:hover {
     <body>
         <?php 
             include('../header/header.php');
+            $data = array();
+            if(isset($_POST['data']))
+            {
+                $data = $_POST['data'];
+            }
+            else
+            {
+                $data[] = array("", "", "");
+            }            
+
+            // Check if the "Add Row" button is clicked
+            if (isset($_POST['add_row'])) 
+            {
+                // Add an empty row to the data array
+                $data[] = array("", "", "");
+            }
+        
+            // Check if the "Delete" button is clicked for a specific row
+            if (isset($_POST['delete_row'])) 
+            {
+                // Remove the row from the data array based on the row index
+                $index = $_POST['delete_row'];
+                unset($data[$index]);
+                // Reset array keys to maintain sequential indexing
+                $data = array_values($data);
+            }
         ?>
         <div class="container-md w-50 p-3">
             <h1 class="mt-4 mb-4">New Property Register</h1>
             <form action="addProperty.php" method="POST" enctype="multipart/form-data">
 
                 <?php
-                    $userLevel = $_COOKIE['userLevel'];
-                    if($userLevel == "Admin")
+                    if(isset($_COOKIE['userLevel']))
                     {
-                        $landlordEmail = "";
-                        if(isset($_POST['landlordEmail']) == true)
+                        $userLevel = $_COOKIE['userLevel'];
+                        if($userLevel == "Admin")
                         {
-                            $landlordEmail = $_POST['landlordEmail'];
+                            $landlordEmail = "";
+                            if(isset($_POST['landlordEmail']) == true)
+                            {
+                                $landlordEmail = $_POST['landlordEmail'];
+                            }
+    
+                            echo 
+                            ('
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Landlord Email</label>
+                                    <input type="text" id="landlordEmail" name="landlordEmail" class="form-control" placeholder="Enter Landlord Email"
+                                    value="'.$landlordEmail.'">
+                                </div>
+                            ');
                         }
-
-                        echo 
-                        ('
-                            <div class="form-group">
-                                <label class="font-weight-bold">Landlord Email</label>
-                                <input type="text" id="landlordEmail" name="landlordEmail" class="form-control" placeholder="Enter Landlord Email"
-                                value="'.$landlordEmail.'">
-                            </div>
-                        ');
                     }
                 ?>
 
@@ -199,6 +228,34 @@ button[type="submit"]:hover {
                     <input type="text" id="propertyPrice" name="propertyPrice" class="form-control" placeholder="Enter Property Price"
                     value="<?php if(isset($_POST['propertyPrice'])) echo $_POST['propertyPrice']; ?>">
                 </div>
+
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                    </tr>
+                    <?php 
+                        foreach ($data as $index => $row)
+                        {
+                            echo('<tr>');                
+                            foreach ($row as $key => $cell)
+                            {
+                                echo
+                                (
+                                    '
+                                        <td><input type="text" name="data['.$index.']['.$key.']" value="'.$cell.'"></td>
+                                    '
+                                );
+                
+                            }
+                            echo('<td><button type="submit" name="delete_row" value="'.$index.'">Delete</button></td>');
+                            echo('</tr>');
+                        }
+
+                    ?>
+                </table>
+                <button type="submit" name="add_row">Add Row</button>
 
                 <input type="file" name="uploadImageFiles[]" id="uploadImageFiles" multiple  class="upload">
                 <!--<input type="submit" name="uploadImageCall" value="Upload"> -->
@@ -275,7 +332,9 @@ button[type="submit"]:hover {
                         $result = addPropertyToDB($db_connection, $userID, $numberOfBeds, $contractLength, $propertyDescription, $propertyAddress, $propertyPostcode, $propertyPrice);            
                         if($result)
                         {
-                            addImagesToDB($db_connection, $db_connection->insert_id, $imageArray);
+                            $property_id = $db_connection->insert_id;
+                            addImagesToDB($db_connection, $property_id, $imageArray);
+                            addItemsToDB($db_connection, $property_id);
                             if($result)
                             {
                                 showSuccess("Property Added");
@@ -497,6 +556,25 @@ button[type="submit"]:hover {
                         VALUES ('$property_id', '$item')";
                         $result = mysqli_query($db_connection, $sql);
                         //mysqli_close($db_connection);
+                        if(!$result)
+                        {
+                            return $result;
+                        }
+                    }
+                    return 1;
+                }
+
+                function addItemsToDB($db_connection, $property_id)
+                {
+                    $data = $_POST['data'];
+                    foreach($data as $item)
+                    {
+                        $title = $item['0'];
+                        $description = $item['1'];
+                        $quantity = $item['2'];
+                        $sql = "INSERT INTO property_inventory (property_id, title, description, quantity) 
+                        VALUES ('$property_id', '$title', '$description', '$quantity')";
+                        $result = mysqli_query($db_connection, $sql);
                         if(!$result)
                         {
                             return $result;
