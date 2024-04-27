@@ -9,64 +9,142 @@
         <script src="../../bootstrap/assets/js/vendor/jquery-slim.min.js"></script>
         <script src="../../bootstrap/assets/js/vendor/popper.min.js"></script>
         <script src="../../bootstrap/dist/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="addProperty_style.css">
         <title>New Property Register</title>
+        <style>
+            body {
+    margin: 0;
+    padding-left: 1rem;
+    font-family: Arial, sans-serif;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.change-password-container {
+    width: 50%;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #085F63;
+}
+
+.form-group label {
+    display: block;
+    padding-left: 1rem;
+    color: #085F63;
+    margin:.6rem;
+    margin-bottom:0;
+
+}
+
+.form-group input,
+.form-group select {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* margin-left: auto;
+    margin-right: auto;
+    display:block; */
+    margin:.6rem;
+    padding-left: 2rem;
+}
+.upload{
+    margin:1rem;
+}
+button[type="submit"] {
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: #085F63;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+    margin-left: auto;
+    margin-right: auto;
+    display:block;
+    margin-top:1.2rem;
+}
+
+button[type="submit"]:hover {
+    background-color: #49BEB7;
+}
+
+.alert {
+    text-align: center;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: .75rem 1.25rem;
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: .75rem 1.25rem;
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.alert-dismissible {
+    position: relative;
+    padding-right: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.alert-dismissible .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .75rem 1.25rem;
+    color: inherit;
+}
+
+        </style>
     </head>
     <body>
         <?php 
             include('../header/header.php');
-            $data = array();
-            if(isset($_POST['data']))
-            {
-                $data = $_POST['data'];
-            }
-            else
-            {
-                $data[] = array("", "", "");
-            }            
-
-            // Check if the "Add Row" button is clicked
-            if (isset($_POST['add_row'])) 
-            {
-                // Add an empty row to the data array
-                $data[] = array("", "", "");
-            }
-        
-            // Check if the "Delete" button is clicked for a specific row
-            if (isset($_POST['delete_row'])) 
-            {
-                // Remove the row from the data array based on the row index
-                $index = $_POST['delete_row'];
-                unset($data[$index]);
-                // Reset array keys to maintain sequential indexing
-                $data = array_values($data);
-            }
         ?>
         <div class="container-md w-50 p-3">
             <h1 class="mt-4 mb-4">New Property Register</h1>
             <form action="addProperty.php" method="POST" enctype="multipart/form-data">
 
                 <?php
-                    if(isset($_COOKIE['userLevel']))
+                    $userLevel = $_COOKIE['userLevel'];
+                    if($userLevel == "Admin")
                     {
-                        $userLevel = $_COOKIE['userLevel'];
-                        if($userLevel == "Admin")
+                        $landlordEmail = "";
+                        if(isset($_POST['landlordEmail']) == true)
                         {
-                            $landlordEmail = "";
-                            if(isset($_POST['landlordEmail']) == true)
-                            {
-                                $landlordEmail = $_POST['landlordEmail'];
-                            }
-    
-                            echo 
-                            ('
-                                <div class="form-group">
-                                    <label class="font-weight-bold">Landlord Email</label>
-                                    <input type="text" id="landlordEmail" name="landlordEmail" class="form-control" placeholder="Enter Landlord Email"
-                                    value="'.$landlordEmail.'">
-                                </div>
-                            ');
+                            $landlordEmail = $_POST['landlordEmail'];
                         }
+
+                        echo 
+                        ('
+                            <div class="form-group">
+                                <label class="font-weight-bold">Landlord Email</label>
+                                <input type="text" id="landlordEmail" name="landlordEmail" class="form-control" placeholder="Enter Landlord Email"
+                                value="'.$landlordEmail.'">
+                            </div>
+                        ');
                     }
                 ?>
 
@@ -121,34 +199,6 @@
                     <input type="text" id="propertyPrice" name="propertyPrice" class="form-control" placeholder="Enter Property Price"
                     value="<?php if(isset($_POST['propertyPrice'])) echo $_POST['propertyPrice']; ?>">
                 </div>
-
-                <table>
-                    <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Quantity</th>
-                    </tr>
-                    <?php 
-                        foreach ($data as $index => $row)
-                        {
-                            echo('<tr>');                
-                            foreach ($row as $key => $cell)
-                            {
-                                echo
-                                (
-                                    '
-                                        <td><input type="text" name="data['.$index.']['.$key.']" value="'.$cell.'"></td>
-                                    '
-                                );
-                
-                            }
-                            echo('<td><button type="submit" name="delete_row" value="'.$index.'">Delete</button></td>');
-                            echo('</tr>');
-                        }
-
-                    ?>
-                </table>
-                <button type="submit" name="add_row">Add Row</button>
 
                 <input type="file" name="uploadImageFiles[]" id="uploadImageFiles" multiple  class="upload">
                 <!--<input type="submit" name="uploadImageCall" value="Upload"> -->
@@ -225,9 +275,7 @@
                         $result = addPropertyToDB($db_connection, $userID, $numberOfBeds, $contractLength, $propertyDescription, $propertyAddress, $propertyPostcode, $propertyPrice);            
                         if($result)
                         {
-                            $property_id = $db_connection->insert_id;
-                            addImagesToDB($db_connection, $property_id, $imageArray);
-                            addItemsToDB($db_connection, $property_id);
+                            addImagesToDB($db_connection, $db_connection->insert_id, $imageArray);
                             if($result)
                             {
                                 showSuccess("Property Added");
@@ -449,25 +497,6 @@
                         VALUES ('$property_id', '$item')";
                         $result = mysqli_query($db_connection, $sql);
                         //mysqli_close($db_connection);
-                        if(!$result)
-                        {
-                            return $result;
-                        }
-                    }
-                    return 1;
-                }
-
-                function addItemsToDB($db_connection, $property_id)
-                {
-                    $data = $_POST['data'];
-                    foreach($data as $item)
-                    {
-                        $title = $item['0'];
-                        $description = $item['1'];
-                        $quantity = $item['2'];
-                        $sql = "INSERT INTO property_inventory (property_id, title, description, quantity) 
-                        VALUES ('$property_id', '$title', '$description', '$quantity')";
-                        $result = mysqli_query($db_connection, $sql);
                         if(!$result)
                         {
                             return $result;

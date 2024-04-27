@@ -1,0 +1,86 @@
+ Center the container .container-md {
+     margin: 50px auto;
+     /* Center the container horizontally with top and bottom margin */
+     padding: 20px;
+     /* Add padding for space around the content */
+     border: 1px solid #ced4da;
+     /* Add a border around the container */
+     border-radius: 10px;
+     /* Add border radius for rounded corners */
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     /* Add a subtle box shadow for depth */
+     background-color: #fff;
+     /* Set background color to white */
+     box-sizing: border-box;
+     /* Use border-box box sizing for consistent layout */
+ }
+
+ /* Property card styling */
+ .property {
+     margin-bottom: 20px;
+     border: 1px solid #dee2e6;
+     /* Bootstrap's light gray border */
+     border-radius: 10px;
+     /* Add border radius for rounded corners */
+     background-color: #fff;
+     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+     /* Add a subtle box shadow for depth */
+ }
+
+ .property img {
+     border-top-left-radius: 10px;
+     /* Rounded corners for image */
+     border-top-right-radius: 10px;
+     /* Rounded corners for image */
+ }
+
+ .property .card-body {
+     padding: 20px;
+ }
+
+ .property .card-title {
+     font-size: 1.25rem;
+     /* Larger font size for title */
+     margin-bottom: 10px;
+ }
+
+ .property .card-text {
+     margin-bottom: 10px;
+ }
+
+ /* Form styling */
+ form {
+     margin-bottom: 20px;
+ }
+
+ .form-control {
+     margin-bottom: 10px;
+ }
+
+ /* Button styling */
+ .btn {
+     color: #fff;
+     background-color: #007bff;
+     /* Primary color */
+     border-color: #007bff;
+     /* Primary color */
+ }
+
+ .btn:hover {
+     background-color: #0056b3;
+     /* Darker blue on hover */
+     border-color: #0056b3;
+     /* Darker blue on hover */
+ }
+
+ /* Grid layout for form elements */
+ .row {
+     margin-bottom: 20px;
+ }
+
+ .col-md-3 {
+     flex: 0 0 25%;
+     /* 25% width for each column */
+     max-width: 25%;
+     /* 25% maximum width for each column */
+ }
