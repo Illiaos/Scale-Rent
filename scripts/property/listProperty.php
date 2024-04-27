@@ -126,6 +126,7 @@
                         {
                             $filter['userID'] = $_COOKIE['userID'];
                         }
+                        $filter['isRent'] = false;
                         show($db_connection, $filter);
                     }
                 }
@@ -181,6 +182,8 @@
                             $filter['userID'] = validate_form_input($_POST['user_search']);
                         }
                     }
+
+                    $filter['isRent'] = 0;
 
                     show($db_connection, $filter);
 
@@ -296,6 +299,11 @@
                     if(isset($filter['userID']))
                     {
                         $conditions[] = "p.user_id = '{$filter['userID']}'";
+                    }
+
+                    if(isset($filter['isRent']))
+                    {
+                        $conditions[] = "p.isRent = false";
                     }
 
                     if(empty($filter))

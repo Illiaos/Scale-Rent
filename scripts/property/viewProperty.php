@@ -44,6 +44,7 @@
                         //echo(getEmailOwner($db_connection, $_GET['property_id'])['email']);
                         show($db_connection, $_GET['property_id']);
                         showPropertyItems($db_connection, $_GET['property_id']);
+                        showRentButton($_GET['property_id']);
                     }
                 }
 
@@ -215,6 +216,20 @@
                         </div>
                         '
                     );
+                }
+
+                function showRentButton($property_id)
+                {
+                    if(isset($_COOKIE['userLevel']) == false) return;
+                    if(isset($_COOKIE['userLevel']) != "Tenant") return;
+                    echo 
+                    ('
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <a href="rentProperty.php?property_id='.$property_id.'" class="btn btn-primary">Rent</a>
+                            </div>
+                        </div>
+                    ');
                 }
 
                 function getEmailOwner($db_connection, $property_id)
