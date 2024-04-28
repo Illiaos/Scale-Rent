@@ -142,8 +142,9 @@
                 if(mysqli_query($db_connection, $sql))
                 {
                     //call header to send a raw HTTP header to client, curently to the same script, and pass value user registered
-                    header("Location: " . htmlspecialchars($_SERVER['PHP_SELF']) . "?userRegistered=true");
+                    //header("Location: " . htmlspecialchars($_SERVER['PHP_SELF']) . "?userRegistered=true");
                     //stop script execution
+                    showSuccess("User Registered");
                     exit();
                 }
                 else
@@ -318,13 +319,6 @@
                             <strong>Success! </strong>'
                             . $message .
                         '</div>
-                        <form action="registration.php" method="GET">
-                            <button type="submit" value="Submit" name="loadHomePage" class="btn btn-primary p-3">Home Page</button>
-                        </form>
-                        <br />
-                        <form action="registration.php" method="GET">
-                            <button type="submit" value="Submit" name="loadLogInPage" class="btn btn-primary p-3">LogIn Page</button>
-                        </form>
                     </div>
                 ');
             }
