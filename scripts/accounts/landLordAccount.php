@@ -45,16 +45,11 @@
                     }*/
                     $user_id = $_COOKIE['userID'];
 
-                    if(isset($_GET['agreementPath']))
+                    if(isset($_GET['cancelPropertyRent']))
                     {
-                        $agreement_upload_path = '../../uploadsAgreement/'.$_GET['agreementPath'];
-                        $file_name = basename($agreement_upload_path);
-                        file_put_contents($file_name, file_get_contents($agreement_upload_path));
-                    }
-                    else if(isset($_GET['payForProperty']))
-                    {
-                        $property_id = $_GET['payForProperty'];
-                        payForRent($db_connection, $property_id);
+                        $property_id = $_GET['cancelPropertyRent'];
+                        cancelRentInPropertyDB($db_connection, $property_id);
+                        deleteRentForTenent($db_connection, $property_id);
                         header("Location: ".$_SERVER['PHP_SELF']);
                         exit; // Make sure to exit after the header redirection
                     }
@@ -63,40 +58,25 @@
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 {
-                    if(isset($_POST['rentCall']))
-                    {                
-                        $property_id = $_COOKIE['confirmPropertyID'];
-                        $user_id = $_COOKIE['userID'];
-                        if(checkIfAlreadyRent($db_connection, $property_id) == true)
-                        {
-                            showError("Property Already Registered");
-                            return;
-                        }
-                        $agreement = loadAgreement($property_id, $user_id);
-                        $start_date = "";
-                        if(isset($_POST['startRentDate']))
-                        {
-                            $start_date = $_POST['startRentDate'];
-                        }
-                        else
-                        {
-                            showError("Start Rent Data is not selected");
-                            return;
-                        }
-                        $end_date = new DateTime($start_date);
-                        $numberOfMonthsToAdd = getEndRentDate($db_connection, $property_id);
-                        // Create a DateInterval object to represent the interval to add
-                        $dateInterval = new DateInterval('P' . $numberOfMonthsToAdd . 'M');
-                        // Add the interval to the DateTime object
-                        $end_date->add($dateInterval);
-                        // Format the resulting date as a string
-                        $end_date = $end_date->format('Y-m-d');
-                        $price_per_month = (int)getEndRentPrice($db_connection, $property_id);
-                        $price = $price_per_month * (int)$numberOfMonthsToAdd;
-                        addRentToTentDB($db_connection, $user_id, $property_id, $agreement, $start_date, $end_date, 0, $price);
-                        updatePropertyInDB($db_connection, $property_id);
-                        showSuccess("Rent Succesful");
+
+                }
+
+                function cancelRentInPropertyDB($db_connection, $property_id)
+                {
+                    $cancelRent = false;
+                    $stmt = $db_connection->prepare("UPDATE property SET isRent = ? WHERE property_id = ?");
+                    //pass parameters
+                    $stmt->bind_param("ss", $cancelRent, $property_id);
+                    if($stmt->execute())
+                    {
+                        $stmt->close();
                     }
+                }
+
+                function deleteRentForTenent($db_connection, $property_id)
+                {
+                    $sql = "DELETE FROM tenant_account WHERE property_id = $property_id";
+                    $db_connection->query($sql);
                 }
             
 
@@ -149,7 +129,7 @@
                 function showAccountRentData($db_connection, $user_id)
                 {
                     // Your SQL query to select data 
-                    $sql = "SELECT * from tenant_account WHERE tenant_account.user_id = $user_id";
+                    $sql = "SELECT * from landlord_account WHERE landlord_account.user_id = $user_id";
                     $stmt = $db_connection->prepare($sql);
                     //$stmt->bind_param("s", $userEmail);
                     $stmt->execute();
@@ -162,7 +142,7 @@
                         (
                             '
                                 <h2 class="mt-3 mb-4">Property Is Not Rented</h2>
-                                <a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true" class="btn btn-primary">View Property</a>
+                                <!--<a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true" class="btn btn-primary">View Property</a>-->
                             '
                         );
                         return;
@@ -171,29 +151,53 @@
                     // Output data of each row
                     while($row = $result->fetch_assoc()) 
                     {
+                        $propertyRented = checkIfIsRent($db_connection, $row["property_id"]);
                         echo
                         ('
                             <div class="property card">
                                 <div class="card-body">
-                                    <h5 class="card-title"> RENT '.getPostCodeByPropertyId($db_connection, $row["property_id"]).'</h5>
-                                    <p class="card-text">Start Date: '.$row["start_date"].'</p>
-                                    <p class="card-text">End Date: '.$row["end_date"].'</p>
-                                    <p class="card-text">Paid: '.$row["paid"].'</p>
-                                    <p class="card-text">Owed: '.$row["owed"].'</p>
-                                    <a href="tenantAccount.php?agreementPath='.$row["agreement"].'" class="btn btn-primary">Download Agreement</a>
+
+
                         ');
 
-                        $dayOfMonth = date('j');
-                        if ($dayOfMonth >= 1 && $dayOfMonth <= 10 && checkIfNeedPayment($db_connection, $row["property_id"])) 
+                        if($propertyRented)
                         {
-                            echo 
-                            ('
-                            <form action="tenantAccount.php" method="GET">
-                                <button type="submit" name="payForProperty" id="payForProperty" value="'.$row["property_id"].'" class="btn btn-primary">Pay</button>
-                            </form>
-                            ');
+                            echo
+                            (
+                                '
+                                    <h5 class="card-title"> RENTED '.getPostCodeByPropertyId($db_connection, $row["property_id"]).'</h5>
+                                '
+                            );
+                        }
+                        else
+                        {
+                            echo
+                            (
+                                '
+                                    <h5 class="card-title"> NOT RENTED '.getPostCodeByPropertyId($db_connection, $row["property_id"]).'</h5>
+                                '
+                            );
                         }
 
+                        echo
+                        (
+                            '
+                                <p class="card-text">Income: '.$row["income"].'</p>
+                                <p class="card-text">Fee: '.$row["fee"].'</p>
+                            '
+                        );
+
+                        if($propertyRented)
+                        {
+                            echo
+                            (
+                                '
+                                    <form action="landLordAccount.php" method="GET">
+                                        <button type="submit" name="cancelPropertyRent" id="cancelPropertyRent" value="'.$row["property_id"].'" class="btn btn-primary">Cancel Rent</button>
+                                    </form>
+                                '
+                            );
+                        }
                         /*if(isset($_COOKIE['userLevel']) == true && ($_COOKIE['userLevel'] == "Landlord" || $_COOKIE['userLevel'] == "Admin"))
                         {
                             echo 
@@ -228,117 +232,16 @@
                     return $result->fetch_assoc()['post_code'];
                 }
 
-                function payForRent($db_connection, $property_id)
+                function checkIfIsRent($db_connection, $property_id)
                 {
-                    $data = getRentData($db_connection, $property_id);
-                    $paid = (int)$data['paid'];
-                    $owed = (int)$data['owed'];
-                    $monthPayment = (int)getMonthPayment($db_connection, $property_id);
-                    $paid += $monthPayment;
-                    $owed -= $monthPayment;
-
-                    $stmt = $db_connection->prepare("UPDATE tenant_account SET paid = ?, owed = ? WHERE property_id = ?");
-                    //pass parameters
-                    $stmt->bind_param("sss", $paid, $owed, $property_id);
-                    if($stmt->execute())
-                    {
-                        $stmt->close();
-                    }
-                    payForRentLandLord($db_connection, $property_id, $paid);
-                }
-
-                function payForRentLandLord($db_connection, $property_id, $paid)
-                {
-                    $data = getLandLordData($db_connection, $property_id);
-                    $income = (int)$data['income'];
-                    $fee = (int)$data['fee'];
-                    
-                    $fee += ($paid * 20) / 100;
-                    $income += ($paid - $fee);
-
-
-                    $stmt = $db_connection->prepare("UPDATE landlord_account SET income = ?, fee = ? WHERE property_id = ?");
-                    //pass parameters
-                    $stmt->bind_param("sss", $income, $fee, $property_id);
-                    if($stmt->execute())
-                    {
-                        $stmt->close();
-                    }
-                }
-
-                function getLandLordData($db_connection, $property_id) : array
-                {
-                    $sql = "SELECT * FROM landlord_account WHERE landlord_account.property_id=".$property_id;
-                    $stmt = $db_connection->prepare($sql);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $stmt->close();
-                    return $result->fetch_assoc();
-                }
-
-                function getRentData($db_connection, $property_id) : array
-                {
-                    $sql = "SELECT * FROM tenant_account WHERE tenant_account.property_id=".$property_id;
-                    $stmt = $db_connection->prepare($sql);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $stmt->close();
-                    return $result->fetch_assoc();
-                }
-
-                function getMonthPayment($db_connection, $property_id) : string
-                {
+                    // Your SQL query to select data 
                     $sql = "SELECT * FROM property WHERE property.property_id=".$property_id;
                     $stmt = $db_connection->prepare($sql);
+                    //$stmt->bind_param("s", $userEmail);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     $stmt->close();
-                    return $result->fetch_assoc()['price'];
-                }
-
-                function checkIfNeedPayment($db_connection, $property_id) : bool
-                {
-                    $monthlyPayment = getMonthPayment($db_connection, $property_id);
-
-                    $sql = "SELECT * FROM tenant_account WHERE tenant_account.property_id=".$property_id;
-                    $stmt = $db_connection->prepare($sql);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $stmt->close();
-
-                    $data = $result->fetch_assoc();
-                    $startDate = $data['start_date'];
-                    $endDate = $data['end_date'];
-                    $alreadyPaid = $data['paid'];
-
-                    $totalDueForMonth = $monthlyPayment;
-
-                    // Check if the current month falls within the range and the total paid amount is equal to or greater than the total amount due for the month
-                    if (isCurrentMonthInRange($startDate, $endDate) && $alreadyPaid >= $totalDueForMonth) 
-                    {
-                        return false;                        
-                    } 
-                    else 
-                    {
-                        return true;
-                    }
-                }
-
-                function isCurrentMonthInRange($startDate, $endDate) 
-                {
-                    $currentDate = new DateTime();
-                    $startData = new DateTime($startDate);
-                    $endDate = new DateTime($endDate);
-                    return ($currentDate >= $startDate && $currentDate <= $endDate);
-                }
-                
-                // Function to calculate the number of months between two dates
-                function getMonthDifference($startDate, $endDate) 
-                {
-                    $start = new DateTime($startDate);
-                    $end = new DateTime($endDate);
-                    $interval = $start->diff($end);
-                    return ($interval->y * 12) + $interval->m;
+                    return $result->fetch_assoc()['isRent'];
                 }
 
                 //method to validate user input

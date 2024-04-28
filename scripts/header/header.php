@@ -93,6 +93,7 @@
                                 <li><a href="/Scale-Rent/index.php">Home</a></li>
                                 <li><a href="/Scale-Rent/scripts/property/addProperty.php">Add New Property</a></li>
                                 <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Own Property</a></li>
+                                <li><a href="/Scale-Rent/scripts/accounts/landLordAccount.php?loadPage=true">Account</a></li>
                                 <li><a href="about.html">About</a></li>
                                 <li><a href="contact-page.html">Contact</a></li>
                             </ul>
