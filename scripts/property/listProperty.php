@@ -133,6 +133,11 @@
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 {
+                    if(isset($_POST['deleteProperty']))
+                    {
+                        deleteProperty($db_connection, $_POST['deleteProperty']);
+                    }
+
                     $filter = [];
                     if(isset($_POST['post_code']) && !empty($_POST['post_code']))
                     {
@@ -209,19 +214,11 @@
                     }*/
                 }
 
-                /*function showForPublic($db_connection,  $filter)
+                function deleteProperty($db_connection, $property_id)
                 {
+                    $sql = "DELETE FROM property WHERE property_id = $property_id";
+                    $db_connection->query($sql);
                 }
-
-                function showForLandlord()
-                {
-
-                }
-
-                function showForAdmin()
-                {
-                    
-                }*/
 
                 function show($db_connection, $filter)
                 {
@@ -255,6 +252,9 @@
                             echo 
                             ('
                             <a href="editProperty.php?property_id='.$row["property_id"].'" class="btn btn-primary">Edit</a>
+                            <form action="listProperty.php" method="POST">
+                                <button name="deleteProperty" id="deleteProperty" value="'.$row['property_id'].'" class="btn btn-primary">Delete</button>
+                            </form>
                             ');
                         }
                         else
