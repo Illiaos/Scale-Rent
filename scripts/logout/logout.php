@@ -48,7 +48,7 @@
                             unset($_COOKIE['userID']);
                             setcookie('userID', '', -1, '/'); 
                         }
-                        header("Location: /Scale-Rent/scripts/logout/logout.php?logOutConfirmation");
+                        header("Location: /ass03/scripts/logout/logout.php?logOutConfirmation");
                         exit();
                     }
                     else if(isset($_GET['logOutConfirmation']))

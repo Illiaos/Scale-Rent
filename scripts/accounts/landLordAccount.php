@@ -142,7 +142,7 @@
                         (
                             '
                                 <h2 class="mt-3 mb-4">Property Is Not Rented</h2>
-                                <!--<a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true" class="btn btn-primary">View Property</a>-->
+                                <!--<a href="/ass03/scripts/property/listProperty.php?loadPage=true" class="btn btn-primary">View Property</a>-->
                             '
                         );
                         return;

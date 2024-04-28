@@ -11,7 +11,7 @@
     <body>
         <div id="side-head">
             <div class="site-logo">
-                <img src="/Scale-Rent/pics/logo-removebg-preview.png" alt="site-logo">
+                <img src="/ass03/pics/logo-removebg-preview.png" alt="site-logo">
             </div>
 
             <?php
@@ -19,12 +19,12 @@
                 {
                     if(isset($_POST['logInPage']))
                     {
-                        header("Location: /Scale-Rent/scripts/log_in/logIn.php");
+                        header("Location: /ass03/scripts/log_in/logIn.php");
                         exit();
                     }
                     else if(isset($_POST['logOutPage']))
                     {
-                        header('Location: /Scale-Rent/scripts/logout/logout.php?cookieReset');
+                        header('Location: /ass03/scripts/logout/logout.php?cookieReset');
                         exit();
                     }
                 }
@@ -75,10 +75,10 @@
                     ('
                         <nav>
                             <ul class="nav-links">
-                                <li><a href="/Scale-Rent/index.php">Home</a></li>
-                                <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Property</a></li>
-                                <li><a href="/Scale-Rent/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
-                                <li><a href="/Scale-Rent/scripts/contact/contact-page.php">Contact</a></li>
+                                <li><a href="/ass03/index.php">Home</a></li>
+                                <li><a href="/ass03/scripts/property/listProperty.php?loadPage=true">View Property</a></li>
+                                <li><a href="/ass03/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
+                                <li><a href="/ass03/scripts/contact/contact-page.php">Contact</a></li>
                             </ul>
                         </nav>
                     ');
@@ -90,13 +90,13 @@
                     ('
                         <nav>
                             <ul class="nav-links">
-                                <li><a href="/Scale-Rent/index.php">Home</a></li>
-                                <li><a href="/Scale-Rent/scripts/property/addProperty.php">Add New Property</a></li>
-                                <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Own Property</a></li>
-                                <li><a href="/Scale-Rent/scripts/accounts/landLordAccount.php?loadPage=true">Account</a></li>
-                                <li><a href="/Scale-Rent/scripts/testimonial/addTestimonial.php?loadPage=true">Add Testimonial</a></li>
-                                <li><a href="/Scale-Rent/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
-                                <li><a href="/Scale-Rent/scripts/contact/contact-page.php">Contact</a></li>
+                                <li><a href="/ass03/index.php">Home</a></li>
+                                <li><a href="/ass03/scripts/property/addProperty.php">Add New Property</a></li>
+                                <li><a href="/ass03/scripts/property/listProperty.php?loadPage=true">View Own Property</a></li>
+                                <li><a href="/ass03/scripts/accounts/landLordAccount.php?loadPage=true">Account</a></li>
+                                <li><a href="/ass03/scripts/testimonial/addTestimonial.php?loadPage=true">Add Testimonial</a></li>
+                                <li><a href="/ass03/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
+                                <li><a href="/ass03/scripts/contact/contact-page.php">Contact</a></li>
                             </ul>
                         </nav>
                     ');
@@ -108,12 +108,12 @@
                     ('
                         <nav>
                             <ul class="nav-links">
-                                <li><a href="/Scale-Rent/index.php">Home</a></li>
-                                <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Property</a></li>
-                                <li><a href="/Scale-Rent/scripts/accounts/tenantAccount.php?loadPage=true">Account</a></li>
-                                <li><a href="/Scale-Rent/scripts/testimonial/addTestimonial.php?loadPage=true">Add Testimonial</a></li>
-                                <li><a href="/Scale-Rent/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
-                                <li><a href="/Scale-Rent/scripts/contact/contact-page.php">Contact</a></li>
+                                <li><a href="/ass03/index.php">Home</a></li>
+                                <li><a href="/ass03/scripts/property/listProperty.php?loadPage=true">View Property</a></li>
+                                <li><a href="/ass03/scripts/accounts/tenantAccount.php?loadPage=true">Account</a></li>
+                                <li><a href="/ass03/scripts/testimonial/addTestimonial.php?loadPage=true">Add Testimonial</a></li>
+                                <li><a href="/ass03/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
+                                <li><a href="/ass03/scripts/contact/contact-page.php">Contact</a></li>
                             </ul>
                         </nav>
                     ');
@@ -125,14 +125,14 @@
                     ('
                         <nav>
                             <ul class="nav-links">
-                                <li><a href="/Scale-Rent/index.php">Home</a></li>
-                                <li><a href="/Scale-Rent/scripts/property/addProperty.php">Add New Property</a></li>
-                                <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Property</a></li>
-                                <li><a href="/Scale-Rent/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
-                                <li><a href="/Scale-Rent/scripts/testimonial/manageTestimonial.php">Manage Testimonial</a></li>
-                                <li><a href="/Scale-Rent/scripts/accounts/manageAccounts.php">Manage Accounts</a></li>
-                                <li><a href="/Scale-Rent/scripts/contact/contact-page.php">Contact</a></li>
-                                <li><a href="/Scale-Rent/scripts/contact/contact-page-manage.php">Contact Manager</a></li>
+                                <li><a href="/ass03/index.php">Home</a></li>
+                                <li><a href="/ass03/scripts/property/addProperty.php">Add New Property</a></li>
+                                <li><a href="/ass03/scripts/property/listProperty.php?loadPage=true">View Property</a></li>
+                                <li><a href="/ass03/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
+                                <li><a href="/ass03/scripts/testimonial/manageTestimonial.php">Manage Testimonial</a></li>
+                                <li><a href="/ass03/scripts/accounts/manageAccounts.php">Manage Accounts</a></li>
+                                <li><a href="/ass03/scripts/contact/contact-page.php">Contact</a></li>
+                                <li><a href="/ass03/scripts/contact/contact-page-manage.php">Contact Manager</a></li>
                             </ul>
                         </nav>
                     ');
