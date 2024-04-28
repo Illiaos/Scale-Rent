@@ -216,13 +216,3 @@ form {
     max-width: 25%;
     /* 25% maximum width for each column */
 }
-
-/* Responsive layout for smaller screens */
-@media (max-width: 768px) {
-    .col-md-3 {
-        flex: 0 0 100%;
-        /* Full width for smaller screens */
-        max-width: 100%;
-        /* Full width for smaller screens */
-    }
-}

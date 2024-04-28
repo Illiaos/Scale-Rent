@@ -14,7 +14,7 @@
     </head>
     <body>
         <?php 
-            include('../header/header.php');
+            include('..\header\header.php');
             $data = array();
             if(isset($_POST['data']))
             {
