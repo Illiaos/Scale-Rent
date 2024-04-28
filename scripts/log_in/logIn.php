@@ -90,7 +90,6 @@
                     }
                     else
                     {
-                        echo("ENTER");
                         showSingleError("Wrong Email or Password");
                     }
                 }
@@ -129,9 +128,9 @@
                             showError($item);
                         }
                         //render home button
-                        showHomeButton();
-                        showRegistrationButton();
-                        echo('</div>');
+                        //showHomeButton();
+                        //showRegistrationButton();
+                        //echo('</div>');
                         return false;
                     }
                     return true;
@@ -202,7 +201,6 @@
                 {
                     echo ('<div class="container-md w-50 p-3">');
                     showError($errorMessage);
-                    showHomeButton();
                     echo ('</div>');
                 }
 
@@ -217,30 +215,6 @@
                                 <strong>Success! </strong>'
                                 . $message .
                             '</div>
-                    ');
-                    showHomeButton();
-                    echo('<br />');
-                    showRegistrationButton();
-                    echo('</div>');
-                }
-
-                function showHomeButton()
-                {
-                    echo
-                    ('
-                        <form action="logIn.php" method="GET">
-                            <button type="submit" value="Submit" name="loadHomePage" class="btn btn-primary p-3">Home Page</button>
-                        </form>
-                    ');
-                }
-
-                function showRegistrationButton()
-                {
-                    echo
-                    ('
-                        <form action="logIn.php" method="GET">
-                            <button type="submit" value="Submit" name="loadRegistrationPage" class="btn btn-primary p-3">Registration Page</button>
-                        </form>
                     ');
                 }
             ?>

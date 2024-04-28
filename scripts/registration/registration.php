@@ -14,6 +14,9 @@
         <title>User Registration</title>
     </head>
     <body>
+        <?php 
+            include('../header/header.php');
+        ?>
     <div class="registration-container">
         <h2>Register</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -56,7 +59,7 @@
             </div>
             <button type="submit" value="Submit">Register User</button>
         </form>
-        <p>Already have an account? <a href="login.php">Log in here</a>.</p>
+        <p>Already have an account? <a href="../log_in./logIn.php">Log in here</a>.</p>
     </div>
 
         <?php
@@ -223,8 +226,6 @@
                         //call method to render error, which is passed as a parameter
                         showError($item);
                     }
-                    //call method to render home button
-                    showHomeButton();
                     echo('</div>');
                     return false;
                 }
@@ -298,22 +299,11 @@
                 ');
             }
 
-            //method to render home button
-            function showHomeButton()
-            {
-                echo ('
-                    <form action="registration.php" method="GET">
-                        <button type="submit" value="Submit" name="loadHomePage" class="btn btn-primary p-3">Home Page</button>
-                    </form>
-                ');
-            }
-
             //method used to render single error, used when it is planning to show only one button
             function showSingleError($errorMessage)
             {
                 echo ('<div class="container-md w-50 p-3">');
                 showError($errorMessage);
-                showHomeButton();
                 echo ('</div>');
             }
 
