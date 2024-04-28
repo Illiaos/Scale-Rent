@@ -68,7 +68,7 @@
                         $user_id = $_COOKIE['userID'];
                         if(checkIfAlreadyRent($db_connection, $property_id) == true)
                         {
-                            showError("Property Already Registered");
+                            showError("Property Already Rented");
                             return;
                         }
                         $agreement = loadAgreement($property_id, $user_id);
@@ -100,7 +100,7 @@
 
                 function checkIfAlreadyRent($db_connection, $property_id)
                 {
-                    $stmt = $db_connection->prepare("SELECT * FROM property WHERE isRent=true");
+                    $stmt = $db_connection->prepare("SELECT * FROM property WHERE property_id=".$property_id);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     $stmt->close();
@@ -109,7 +109,7 @@
                     {
                         false;
                     }
-                    return true;
+                    return $result->fetch_assoc()['isRent'];
                 }
                 
                 function addRentToTentDB($db_connection, $user_id, $property_id, $agreement, $start_date, $end_date, $paid, $owed)
