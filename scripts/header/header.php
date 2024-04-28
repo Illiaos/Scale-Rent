@@ -77,7 +77,6 @@
                             <ul class="nav-links">
                                 <li><a href="/Scale-Rent/index.php">Home</a></li>
                                 <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Property</a></li>
-                                <li><a href="about.html">About</a></li>
                                 <li><a href="/Scale-Rent/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
                                 <li><a href="/Scale-Rent/scripts/contact/contact-page.php">Contact</a></li>
                             </ul>
@@ -96,7 +95,6 @@
                                 <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Own Property</a></li>
                                 <li><a href="/Scale-Rent/scripts/accounts/landLordAccount.php?loadPage=true">Account</a></li>
                                 <li><a href="/Scale-Rent/scripts/testimonial/addTestimonial.php?loadPage=true">Add Testimonial</a></li>
-                                <li><a href="about.html">About</a></li>
                                 <li><a href="/Scale-Rent/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
                                 <li><a href="/Scale-Rent/scripts/contact/contact-page.php">Contact</a></li>
                             </ul>
@@ -114,7 +112,6 @@
                                 <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Property</a></li>
                                 <li><a href="/Scale-Rent/scripts/accounts/tenantAccount.php?loadPage=true">Account</a></li>
                                 <li><a href="/Scale-Rent/scripts/testimonial/addTestimonial.php?loadPage=true">Add Testimonial</a></li>
-                                <li><a href="about.html">About</a></li>
                                 <li><a href="/Scale-Rent/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
                                 <li><a href="/Scale-Rent/scripts/contact/contact-page.php">Contact</a></li>
                             </ul>
@@ -128,12 +125,12 @@
                     ('
                         <nav>
                             <ul class="nav-links">
-                                <li><a href="../../index.php">Home</a></li>
+                                <li><a href="/Scale-Rent/index.php">Home</a></li>
                                 <li><a href="/Scale-Rent/scripts/property/addProperty.php">Add New Property</a></li>
                                 <li><a href="/Scale-Rent/scripts/property/listProperty.php?loadPage=true">View Property</a></li>
-                                <li><a href="about.html">About</a></li>
                                 <li><a href="/Scale-Rent/scripts/testimonial/showTestimonial.php">Testimonial</a></li>
                                 <li><a href="/Scale-Rent/scripts/testimonial/manageTestimonial.php">Manage Testimonial</a></li>
+                                <li><a href="/Scale-Rent/scripts/accounts/manageAccounts.php">Manage Accounts</a></li>
                                 <li><a href="/Scale-Rent/scripts/contact/contact-page.php">Contact</a></li>
                                 <li><a href="/Scale-Rent/scripts/contact/contact-page-manage.php">Contact Manager</a></li>
                             </ul>
