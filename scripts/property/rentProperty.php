@@ -93,6 +93,7 @@
                         $price_per_month = (int)getEndRentPrice($db_connection, $property_id);
                         $price = $price_per_month * (int)$numberOfMonthsToAdd;
                         addRentToTentDB($db_connection, $user_id, $property_id, $agreement, $start_date, $end_date, 0, $price);
+                        addRentToLandLord($db_connection, $property_id);
                         updatePropertyInDB($db_connection, $property_id);
                         showSuccess("Rent Succesful");
                     }
@@ -120,6 +121,32 @@
                                     
                     $result = mysqli_query($db_connection, $sql);
                     return $result;
+                }
+
+                function addRentToLandLord($db_connection, $property_id)
+                {
+                    $landLordId = (int)getPropertyOwnerId($db_connection, $property_id);
+                    //sql query that adds data to DB
+                    $sql = "INSERT INTO landlord_account (user_id, property_id, income, fee) 
+                            VALUES ('$landLordId', '$property_id', '0', '0')";
+                                                        
+                    $result = mysqli_query($db_connection, $sql);
+                    return $result;
+                }
+
+                function getPropertyOwnerId($db_connection, $property_id)
+                {
+                    $stmt = $db_connection->prepare("SELECT * FROM property WHERE property_id=?");
+                    $stmt->bind_param("s", $property_id);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $stmt->close();
+
+                    if($result->num_rows == 0)
+                    {
+                        return "";
+                    }
+                    return $result->fetch_assoc()['user_id'];
                 }
 
                 function getEndRentDate($db_connection, $property_id) : string

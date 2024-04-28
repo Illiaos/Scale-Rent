@@ -44,7 +44,6 @@
                         setcookie("confirmPropertyID", $property_id, time() + (86400 * 30), "/");
                     }*/
                     $user_id = $_COOKIE['userID'];
-                    showAccountRentData($db_connection, $user_id);
 
                     if(isset($_GET['agreementPath']))
                     {
@@ -56,7 +55,10 @@
                     {
                         $property_id = $_GET['payForProperty'];
                         payForRent($db_connection, $property_id);
+                        header("Location: ".$_SERVER['PHP_SELF']);
+                        exit; // Make sure to exit after the header redirection
                     }
+                    showAccountRentData($db_connection, $user_id);
                 }
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -187,7 +189,9 @@
                         {
                             echo 
                             ('
-                                <a href="tenantAccount.php?payForProperty='.$row["property_id"].'" class="btn btn-primary">Pay</a>
+                            <form action="tenantAccount.php" method="GET">
+                                <button type="submit" name="payForProperty" id="payForProperty" value="'.$row["property_id"].'" class="btn btn-primary">Pay</button>
+                            </form>
                             ');
                         }
 
@@ -241,6 +245,36 @@
                     {
                         $stmt->close();
                     }
+                    payForRentLandLord($db_connection, $property_id, $paid);
+                }
+
+                function payForRentLandLord($db_connection, $property_id, $paid)
+                {
+                    $data = getLandLordData($db_connection, $property_id);
+                    $income = (int)$data['income'];
+                    $fee = (int)$data['fee'];
+                    
+                    $fee += ($paid * 20) / 100;
+                    $income += ($paid - $fee);
+
+
+                    $stmt = $db_connection->prepare("UPDATE landlord_account SET income = ?, fee = ? WHERE property_id = ?");
+                    //pass parameters
+                    $stmt->bind_param("sss", $income, $fee, $property_id);
+                    if($stmt->execute())
+                    {
+                        $stmt->close();
+                    }
+                }
+
+                function getLandLordData($db_connection, $property_id) : array
+                {
+                    $sql = "SELECT * FROM landlord_account WHERE landlord_account.property_id=".$property_id;
+                    $stmt = $db_connection->prepare($sql);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $stmt->close();
+                    return $result->fetch_assoc();
                 }
 
                 function getRentData($db_connection, $property_id) : array
