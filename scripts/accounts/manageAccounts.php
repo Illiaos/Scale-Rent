@@ -87,7 +87,7 @@
 
                 function deleteAccount($db_connection, $user_id)
                 {
-                    $sql = "DELETE FROM user WHERE user_id = $user_id";
+                    $sql = "DELETE FROM user_ass03 WHERE user_id = $user_id";
                     $db_connection->query($sql);
                 }
 
@@ -120,12 +120,12 @@
                     $sql = "";
                     if(empty($filter))
                     {
-                        $sql = "SELECT * FROM user";
+                        $sql = "SELECT * FROM user_ass03";
                     }
                     else
                     {
                         $typeIndex = getUserTypeId($db_connection, $filter);
-                        $sql = "SELECT * FROM user WHERE type_id=".$typeIndex;
+                        $sql = "SELECT * FROM user_ass03 WHERE type_id=".$typeIndex;
                     }
                     $stmt = $db_connection->prepare($sql);
                     //$stmt->bind_param("s", $userEmail);

@@ -289,7 +289,7 @@
 
                 function getSqlQuerryEmail($property_id) : string
                 {
-                    return "SELECT user.email FROM user JOIN property ON user.user_id=property.user_id WHERE property.property_id = " .$property_id;
+                    return "SELECT user_ass03.email FROM user_ass03 JOIN property ON user_ass03.user_id=property.user_id WHERE property.property_id = " .$property_id;
                 }
 
                 function getSqlQuerryForItems($property_id) : string

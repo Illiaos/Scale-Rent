@@ -139,7 +139,7 @@
 
                 function checkUserLogInData($db_connection, $userEmail, $userPassword) : bool
                 {
-                    $stmt = $db_connection->prepare("SELECT * FROM user WHERE email=?");
+                    $stmt = $db_connection->prepare("SELECT * FROM user_ass03 WHERE email=?");
                     $stmt->bind_param("s", $userEmail);
                     $stmt->execute();
                     $result = $stmt->get_result();

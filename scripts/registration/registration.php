@@ -135,7 +135,7 @@
                 $userPassword = password_hash($userPassword, PASSWORD_BCRYPT);
                 $userTypeForeignKey = getTypeIdForeignKey($db_connection, $userType);
                 //sql query used to add data to DB
-                $sql = "INSERT INTO user (type_id, name, surname, email, password)
+                $sql = "INSERT INTO user_ass03 (type_id, name, surname, email, password)
                 VALUES('$userTypeForeignKey', '$userName', '$userSurname', '$userEmail', '$userPassword')";
 
                 //call sql compilation
@@ -169,7 +169,7 @@
             function checkIfUserExist($db_connection, $userEmail)
             {     
                 //sql query used to check if user with email already exist
-                $sql = "SELECT * FROM user WHERE email='$userEmail'";
+                $sql = "SELECT * FROM user_ass03 WHERE email='$userEmail'";
                 //execute sql
                 $result = mysqli_query($db_connection, $sql);
                 if(mysqli_num_rows($result) == 0)

@@ -146,7 +146,7 @@
             {
                 $password = password_hash($password, PASSWORD_BCRYPT);
 
-                $stmt = $db_connection->prepare("UPDATE user SET password = ? where email = ?");
+                $stmt = $db_connection->prepare("UPDATE user_ass03 SET password = ? where email = ?");
                 $stmt->bind_param("ss", $password, $userEmail);
                 if($stmt->execute())
                 {
@@ -163,7 +163,7 @@
             function checkIfUserExist($db_connection, $userEmail)
             {     
                 //sql query used to check if user with email already exist
-                $sql = "SELECT * FROM user WHERE email='$userEmail'";
+                $sql = "SELECT * FROM user_ass03 WHERE email='$userEmail'";
                 //execute sql
                 $result = mysqli_query($db_connection, $sql);
                 if(mysqli_num_rows($result) == 0)

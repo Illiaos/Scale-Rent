@@ -128,7 +128,7 @@
 
         function getUserData($db_connection, $userID)
         {
-            $stmt = $db_connection->prepare("SELECT * FROM user WHERE user.user_id=".$userID);
+            $stmt = $db_connection->prepare("SELECT * FROM user_ass03 WHERE user_ass03.user_id=".$userID);
             $stmt->execute();
             $result = $stmt->get_result();
             $stmt->close();
