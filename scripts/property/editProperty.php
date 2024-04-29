@@ -128,7 +128,7 @@ button[type="submit"]:hover {
             //define server path
             if ($_SERVER['SERVER_NAME'] == 'knuth.griffith.ie')
             {
-                $path_to_mysql_connect = '../../../../mysql_connect.php';
+                $path_to_mysql_connect = '../../../../../mysql_connect.php';
             }
             else
             {
@@ -337,7 +337,9 @@ button[type="submit"]:hover {
                         $imageArray = loadImages();
                         //assign user input from POST
                         $numberOfBeds = validate_form_input($_POST['numberOfBeds']);
+                        $numberOfBeds = (int)$numberOfBeds;
                         $contractLength = validate_form_input($_POST['contractLength']);
+                        $contractLength = (int)$contractLength;
                         $propertyDescription = validate_form_input($_POST['propertyDescription']);
                         $propertyAddress = validate_form_input($_POST['propertyAddress']);
                         $propertyPostcode = validate_form_input($_POST['propertyPostcode']);

@@ -23,7 +23,7 @@
                 //define server path
                 if ($_SERVER['SERVER_NAME'] == 'knuth.griffith.ie')
                 {
-                    $path_to_mysql_connect = '../../../../mysql_connect.php';
+                    $path_to_mysql_connect = '../../../../../mysql_connect.php';
                 }
                 else
                 {
@@ -48,7 +48,7 @@
                             unset($_COOKIE['userID']);
                             setcookie('userID', '', -1, '/'); 
                         }
-                        header("Location: /ass03/scripts/logout/logout.php?logOutConfirmation");
+                        header("Location: /~s3098121/scripts/ass03/scripts/logout/logout.php?logOutConfirmation");
                         exit();
                     }
                     else if(isset($_GET['logOutConfirmation']))

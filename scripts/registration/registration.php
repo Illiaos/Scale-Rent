@@ -66,7 +66,7 @@
             //define server path
             if ($_SERVER['SERVER_NAME'] == 'knuth.griffith.ie')
             {
-                $path_to_mysql_connect = '../../../../mysql_connect.php';
+                $path_to_mysql_connect = '../../../../../mysql_connect.php';
             }
             else
             {

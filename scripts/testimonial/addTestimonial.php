@@ -85,7 +85,7 @@
         //define server path
         if ($_SERVER['SERVER_NAME'] == 'knuth.griffith.ie')
         {
-            $path_to_mysql_connect = '../../../../mysql_connect.php';
+            $path_to_mysql_connect = '../../../../../mysql_connect.php';
         }
         else
         {
@@ -112,7 +112,7 @@
                 }
                 $date = date("Y-m-d"); 
                 $serviceName = $_POST['serviceName'];
-                $approved = false;
+                $approved = 0;
                 $writerName = $userName . " " . $userSurname;
                 // validation
                 if (empty($serviceName) || empty($message)) 

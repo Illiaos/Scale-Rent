@@ -21,7 +21,7 @@
                 //define server path
                 if ($_SERVER['SERVER_NAME'] == 'knuth.griffith.ie')
                 {
-                    $path_to_mysql_connect = '../../../../mysql_connect.php';
+                    $path_to_mysql_connect = '../../../../../mysql_connect.php';
                 }
                 else
                 {
@@ -142,7 +142,7 @@
                         (
                             '
                                 <h2 class="mt-3 mb-4">Property Is Not Rented</h2>
-                                <!--<a href="/ass03/scripts/property/listProperty.php?loadPage=true" class="btn btn-primary">View Property</a>-->
+                                <!--<a href="/~s3098121/scripts/ass03/scripts/property/listProperty.php?loadPage=true" class="btn btn-primary">View Property</a>-->
                             '
                         );
                         return;
